@@ -1,0 +1,40 @@
+html, body {
+  height: 100%; }
+
+.container-fluid {
+  padding: 0; }
+
+#content-container {
+  margin: auto;
+  width: 100%;
+  height: 90%; }
+
+.no-left-padding {
+  padding-left: 0; }
+
+.no-right-padding {
+  padding-right: 0; }
+
+#formatting-container, #assett-container {
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  padding: 10px;
+  height: 45px; }
+  #formatting-container #editor-left, #assett-container #editor-left {
+    width: 50%;
+    float: left; }
+  #formatting-container #editor-right, #assett-container #editor-right {
+    width: 50%;
+    float: left;
+    text-align: right; }
+
+#editor-container {
+  height: 100%;
+  padding-top: 25px; }
+
+#editor-wrapper {
+  height: 100%; }
+
+.ql-picker-label {
+  background-color: #fbfbfb !important; }
