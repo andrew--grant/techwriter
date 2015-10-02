@@ -33,7 +33,7 @@ $('#close').on("click", function () {
 	// todo: do  save, then redirect
 	location.href = '/';
 });
-
+//todo: add dim brightness / contrasts (via css animations??)
 // todo: build quill component
 React.render(
 <h1>Hello, world!</h1>,
