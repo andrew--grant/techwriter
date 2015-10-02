@@ -11968,4 +11968,11 @@ $('#close').on("click", function () {
 	location.href = '/';
 });
 
+// todo: build quill component
+React.render(React.createElement(
+	'h1',
+	null,
+	'Hello, world!'
+), document.getElementById('app'));
+
 },{"quill":2,"superagent":3}]},{},[6]);

@@ -34,3 +34,9 @@ $('#close').on("click", function () {
 	location.href = '/';
 });
 
+// todo: build quill component
+React.render(
+<h1>Hello, world!</h1>,
+	document.getElementById('app')
+);
+
