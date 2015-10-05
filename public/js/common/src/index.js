@@ -1,2 +1,2 @@
-let x = 2;
+let x = 7;
 console.log("x ss" + x);

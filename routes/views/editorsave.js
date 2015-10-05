@@ -6,17 +6,16 @@ exports = module.exports = function (req, res) {
 	let content = req.body.contents;
 
 	console.log(id);
-	
-	
+
 	var keystone = require('keystone'),
 		Chapter = keystone.list('Chapter');
- 
-	
+
+
 	var newChapter = new Chapter.model({
 		title: 'New Chapter',
-		content:JSON.stringify(content)
-	}); 
-	
+		content: JSON.stringify(content)
+	});
+
 	newChapter.save(function (err) {
 		if (err) {
 			console.log("err = " + err);

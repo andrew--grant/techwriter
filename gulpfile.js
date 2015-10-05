@@ -8,13 +8,14 @@ var livereload = require('gulp-livereload');
 var notify = require('gulp-notify');
 var babelify = require("babelify");
 
-var bundleCommon = {src: './public/js/common/index.js', dest: './public/js/common', bundleName: 'bundle-common.js'};
-var bundleEditor = {src: './public/js/editor/index.js', dest: './public/js/editor', bundleName: 'bundle-editor.js'};
+var bundleCommon = {src: './public/js/common/src/index.js', dest: './public/js/common', bundleName: 'bundle-common.js'};
+var bundleEditor = {src: './public/js/editor/src/index.js', dest: './public/js/editor', bundleName: 'bundle-editor.js'};
 
 var watching = false;
 gulp.task('watch', function () {
+	notify('rty');
 	if (!watching) {
-		watch([bundleCommon.src, bundleEditor.src], batch(function (events, done) {
+		watch(['./public/js/common/src/**/*.js', './public/js/editor/src/**/*.js'], batch(function (events, done) {
 			gulp.start(['browserify-common', 'browserify-editor'], done);
 		}));
 		watching = true;
@@ -22,7 +23,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('browserify-common', function () { 
-	return browserify(bundleCommon.src)
+	return browserify({entries: bundleCommon.src})
 		.transform(babelify)
 		.bundle()
 		.pipe(source(bundleCommon.bundleName))
@@ -30,7 +31,7 @@ gulp.task('browserify-common', function () {
 });
 
 gulp.task('browserify-editor', function () { 
-	return browserify(bundleEditor.src)
+	return browserify({entries: bundleEditor.src})
 		.transform(babelify)
 		.bundle()
 		.pipe(source(bundleEditor.bundleName))
@@ -41,8 +42,15 @@ gulp.task('start', function () {
 	nodemon({
 		script: 'keystone.js'
 		, ext: 'js hbs',
-		ignore: ['./public/js/']
-	})
+		ignore: ['./public/js/'],
+		execMap: {
+			js: "node --harmony"
+		}
+	}).on('restart', function () {
+		console.log('restarted!')
+	});
+	
+	
 	gulp.start(['watch']);
 });
  
