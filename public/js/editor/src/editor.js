@@ -1,59 +1,101 @@
 "use strict";
 var Quill = require('quill');
 var superagent = require('superagent');
-
-var quillConfig = {
-	modules: {
-		'toolbar': {container: '#formatting-container'},
-		'link-tooltip': true,
-		'image-tooltip': true
-	},
-	theme: 'snow',
-	poll: 100
-};
-
+var NotificationSystem = require('react-notification-system');
 
 var Editor = React.createClass({
 
 	getInitialState: function () {
 		return {
-			contents: this.props.initialcontent,
+			contents: null,
+			chapterid: null,
 			isLoadingContents: true,
 			isInitialPageLoad: true,
 			editor: null
 		};
 	},
 
-
-	loadContents: function (evt) {
-		//http://localhost:3000/editorload/56106cfe0568e0da041af51d
-
+	componentDidMount: function () {
+		var editor = new Quill('#editor-container', {
+			modules: {
+				'toolbar': {container: '#formatting-container'},
+				'link-tooltip': true,
+				'image-tooltip': true
+			},
+			theme: 'snow',
+			poll: 100
+		});
+		this.state.editor = editor;
+		this.loadContents(); 
+		this._notificationSystem = this.refs.notificationSystem;
 	},
 
-	componentDidMount: function () {
-		this.loadContents();
-		var editor = new Quill('#editor-container', quillConfig);
-		this.state.editor = editor;
-		editor.focus();
-		//editor.setContents(this.state.contents);
+	loadContents: function (evt) {
+		var self = this;
+		var chapterid = location.search.split('=')[1];
+		if (chapterid) {
+			this.state.chapterid = chapterid;
+			superagent.get('/editorload/?chapterid=' + chapterid)
+				.end(function (err, res) {
+					if (err) {
+						console.log("error");
+						console.log(err);
+					} else {
+						var status = res.body.status;
+						if (status == "success") {
+							console.log(res.body.content);
+							self.state.editor.setContents(JSON.parse(res.body.content));
+							self.state.editor.focus();
+						} else {
+							console.log("status: " + status);
+						}
+					}
+				});
+		}
 	},
 
 	saveContents: function (evt) {
-		var contents = this.state.editor.getContents().content;
-		console.log("contents = " + contents);
-		
-		//superagent.post('/editor/456')
-		//	.send({contents: contents})
-		//	.end(function (err, res) {
-		//		console.log(res.body);
-		//	}) 
+		var self = this;
+		var contents = this.state.editor.getContents();
+		console.log(JSON.stringify(this.state.editor.getContents()));
+		superagent.post('/editorsave/?chapterid=' + this.state.chapterid).
+			send({contents: contents})
+			.end(function (err, res) {
+				if (err) {
+					console.log("error");
+					console.log(err);
+					self.unsuccesfullSaveNotification();
+				} else {
+					console.log("success");
+					self.succesfullSaveNotification();
+				}
+			});
+	},
+
+	succesfullSaveNotification: function () {
+		this._notificationSystem.addNotification({
+			message: 'Your Work has been Saved',
+			level: 'info',
+			position: 'br'
+		});
+	},
+
+	unsuccesfullSaveNotification: function () {
+		this._notificationSystem.addNotification({
+			message: 'Your Work could not be Saved',
+			level: 'error',
+			position: 'br',
+			autoDismiss:0
+		});
 	},
 
 	render: function () {
 		return (
 			<div id="editor-wrapper">
 				<EditorToolbar onSave={this.saveContents}/>
+
 				<div id="editor-container"></div>
+				<NotificationSystem ref="notificationSystem"/>
 			</div>
 		);
 	}
@@ -61,11 +103,10 @@ var Editor = React.createClass({
 
 var EditorToolbar = React.createClass({
 
-
 	render: function () {
 		return (
 			<div id="formatting-container" className="clearfix">
-				<div id="editor-left">
+				<div id="editor-toolbar-left">
 					<select title="Font" className="ql-font">
 						<option value="sans-serif" selected="">Sans Serif</option>
 						<option value="serif">Serif</option>
@@ -125,7 +166,7 @@ var EditorToolbar = React.createClass({
 					<span className="ql-format-separator"></span>
 					<span title="Strikethrough" className="ql-format-button ql-strike"></span>
 				</div>
-				<div id="editor-right"><a onClick={this.props.onSave} href="#" id="save">Save</a> | <a href="#"
+				<div id="editor-toolbar-right"><a onClick={this.props.onSave} href="#" id="save">Save</a> | <a href="#"
 																									   id="close">Close</a>
 				</div>
 			</div>
@@ -135,5 +176,5 @@ var EditorToolbar = React.createClass({
 
 React.render(
 	<Editor/>,
-	document.getElementById('editor')
-);
+	document.getElementById('editorMount')
+); 

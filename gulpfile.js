@@ -11,18 +11,14 @@ var babelify = require("babelify");
 var bundleCommon = {src: './public/js/common/src/index.js', dest: './public/js/common', bundleName: 'bundle-common.js'};
 var bundleEditor = {src: './public/js/editor/src/index.js', dest: './public/js/editor', bundleName: 'bundle-editor.js'};
 
-var watching = false;
+
 gulp.task('watch', function () {
-	notify('rty');
-	if (!watching) {
-		watch(['./public/js/common/src/**/*.js', './public/js/editor/src/**/*.js'], batch(function (events, done) {
-			gulp.start(['browserify-common', 'browserify-editor'], done);
-		}));
-		watching = true;
-	}
+	watch(['./public/js/common/src/**/*.js', './public/js/editor/src/**/*.js'], batch(function (events, done) {
+		gulp.start(['browserify-common', 'browserify-editor'], done);
+	}));
 });
 
-gulp.task('browserify-common', function () { 
+gulp.task('browserify-common', function () {
 	return browserify({entries: bundleCommon.src})
 		.transform(babelify)
 		.bundle()
@@ -30,7 +26,7 @@ gulp.task('browserify-common', function () {
 		.pipe(gulp.dest(bundleCommon.dest));
 });
 
-gulp.task('browserify-editor', function () { 
+gulp.task('browserify-editor', function () {
 	return browserify({entries: bundleEditor.src})
 		.transform(babelify)
 		.bundle()
@@ -46,11 +42,6 @@ gulp.task('start', function () {
 		execMap: {
 			js: "node --harmony"
 		}
-	}).on('restart', function () {
-		console.log('restarted!')
-	});
-	
-	
-	gulp.start(['watch']);
+	})
 });
  

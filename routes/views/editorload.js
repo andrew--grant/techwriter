@@ -4,23 +4,28 @@ var keystone = require('keystone');
 var editorDataSource = require('./../dbapi/editorDataSource.js');
 
 exports = module.exports = function (req, res) {
-	var view = new keystone.View(req, res);
-	var locals = res.locals;
-	let chapterid = req.params.id ? req.params.id : 0;
+	let chapterid = req.query.chapterid ? req.query.chapterid : 0;
 	if (chapterid) {
 		var dataSource = editorDataSource();
-		var data = dataSource.getChapterByID("56106cfe0568e0da041af51d",//todo - not hardcoded!
+		var data = dataSource.getChapterByID(chapterid,//todo - not hardcoded!
 			function (err, doc) {
 				if (!err) {
-					locals.data = {
+					res.json({
+						status:'success',
 						content: doc.content,
-						title: doc.title, 
+						title: doc.title,
 						id: doc._id
-					};
-					view.render('editor', {layout: null});
+					});
 				} else {
-					view.render('editor', {layout: null});
+					console.log("no data");
+					res.json({status:'no chapter found'});
 				}
 			});
+	}else{
+		// no id supplied on incoming query string
+		console.log("no id supplied");
+		// todo: case of no id supplied? There needs 
+		// to be one of no good calling editor load!! 
+		res.json({status:'no chapterid supplied'});
 	}
 };

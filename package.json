@@ -12,7 +12,10 @@
     "keystone": "^0.3.11",
     "moment": "^2.8.1",
     "node-sass-middleware": "^0.9.6",
+    "notification-component": "0.0.3",
     "quill": "^0.20.0",
+    "react-notification": "^2.3.0",
+    "react-notification-system": "^0.1.15",
     "superagent": "^1.4.0",
     "underscore": "^1.8.0"
   },
