@@ -13025,8 +13025,55 @@ React.render(React.createElement(Assets, null), document.getElementById('assetsM
 
 },{"superagent":10}],14:[function(require,module,exports){
 "use strict";
+
+var ContrastControl = React.createClass({
+	displayName: 'ContrastControl',
+
+	getInitialState: function getInitialState() {
+		return { contrastLevel: 1 };
+	},
+
+	componentDidMount: function componentDidMount() {},
+
+	adjustContrast: function adjustContrast() {
+		(function setCss(index, self) {
+			var numLevels = 5;
+			$('body').addClass('contrast' + index);
+			for (var i = 1; i <= numLevels; i++) {
+				if (i != index) {
+					$('body').removeClass('contrast' + i);
+				}
+			}
+			if (numLevels == index) {
+				self.setState({ contrastLevel: 1 });
+			} else {
+				self.setState({ contrastLevel: self.state.contrastLevel + 1 });
+			}
+		})(this.state.contrastLevel, this);
+	},
+
+	render: function render() {
+		return React.createElement(
+			'span',
+			null,
+			'Level: ',
+			this.state.contrastLevel,
+			React.createElement(
+				'a',
+				{ href: '#', onClick: this.adjustContrast },
+				'adjust contrast'
+			)
+		);
+	}
+});
+
+module.exports = ContrastControl;
+
+},{}],15:[function(require,module,exports){
+"use strict";
 var Quill = require('quill');
 var superagent = require('superagent');
+var ContrastControl = require('./contrast-control.js');
 var NotificationSystem = require('react-notification-system');
 
 var Editor = React.createClass({
@@ -13230,16 +13277,16 @@ var EditorToolbar = React.createClass({
 			React.createElement(
 				'div',
 				{ id: 'editor-toolbar-right' },
+				React.createElement(ContrastControl, null),
 				React.createElement(
 					'a',
 					{ onClick: this.props.onSave, href: '#', id: 'save' },
 					'Save'
 				),
-				' | ',
+				' |',
 				React.createElement(
 					'a',
-					{ href: '#',
-						id: 'close' },
+					{ href: '#', id: 'close' },
 					'Close'
 				)
 			)
@@ -13249,9 +13296,9 @@ var EditorToolbar = React.createClass({
 
 React.render(React.createElement(Editor, null), document.getElementById('editorMount'));
 
-},{"quill":2,"react-notification-system":7,"superagent":10}],15:[function(require,module,exports){
+},{"./contrast-control.js":14,"quill":2,"react-notification-system":7,"superagent":10}],16:[function(require,module,exports){
 "use strict";
 require('./editor.js');
 require('./assets.js');
 
-},{"./assets.js":13,"./editor.js":14}]},{},[15]);
+},{"./assets.js":13,"./editor.js":15}]},{},[16]);

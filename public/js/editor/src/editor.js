@@ -1,6 +1,7 @@
 "use strict";
 var Quill = require('quill');
 var superagent = require('superagent');
+var ContrastControl = require('./contrast-control.js');
 var NotificationSystem = require('react-notification-system');
 
 var Editor = React.createClass({
@@ -26,7 +27,7 @@ var Editor = React.createClass({
 			poll: 100
 		});
 		this.state.editor = editor;
-		this.loadContents(); 
+		this.loadContents();
 		this._notificationSystem = this.refs.notificationSystem;
 	},
 
@@ -85,7 +86,7 @@ var Editor = React.createClass({
 			message: 'Your Work could not be Saved',
 			level: 'error',
 			position: 'br',
-			autoDismiss:0
+			autoDismiss: 0
 		});
 	},
 
@@ -165,9 +166,12 @@ var EditorToolbar = React.createClass({
 					<span title="Underline" className="ql-format-button ql-underline"></span>
 					<span className="ql-format-separator"></span>
 					<span title="Strikethrough" className="ql-format-button ql-strike"></span>
+
 				</div>
-				<div id="editor-toolbar-right"><a onClick={this.props.onSave} href="#" id="save">Save</a> | <a href="#"
-																									   id="close">Close</a>
+				<div id="editor-toolbar-right">
+					<ContrastControl/>  
+					<a onClick={this.props.onSave} href="#" id="save">Save</a> |
+					<a href="#" id="close">Close</a>
 				</div>
 			</div>
 		);
