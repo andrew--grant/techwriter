@@ -12894,37 +12894,128 @@ var Assets = React.createClass({
 			React.createElement(
 				"div",
 				{ id: "asset-header" },
-				"m1 | m2 | m3"
+				React.createElement(
+					"ul",
+					{ className: "nav nav-tabs" },
+					React.createElement(
+						"li",
+						{ className: "active" },
+						React.createElement(
+							"a",
+							{ "data-toggle": "tab", href: "#tabChapters" },
+							"Chapters"
+						)
+					),
+					React.createElement(
+						"li",
+						null,
+						React.createElement(
+							"a",
+							{ "data-toggle": "tab", href: "#tabLocations" },
+							"Locations"
+						)
+					),
+					React.createElement(
+						"li",
+						null,
+						React.createElement(
+							"a",
+							{ "data-toggle": "tab", href: "#tabCharacters" },
+							"Characters"
+						)
+					)
+				)
 			),
 			React.createElement(
 				"div",
-				{ className: "chapter-preview-thumb" },
-				"chapter-preview-thumb"
-			),
-			React.createElement(
-				"div",
-				{ className: "chapter-preview-thumb" },
-				"chapter-preview-thumb"
-			),
-			React.createElement(
-				"div",
-				{ className: "chapter-preview-thumb" },
-				"chapter-preview-thumb"
-			),
-			React.createElement(
-				"div",
-				{ className: "chapter-preview-thumb" },
-				"chapter-preview-thumb"
-			),
-			React.createElement(
-				"div",
-				{ className: "chapter-preview-thumb" },
-				"chapter-preview-thumb"
-			),
-			React.createElement(
-				"div",
-				{ className: "chapter-preview-thumb" },
-				"chapter-preview-thumb"
+				{ className: "tab-content" },
+				React.createElement(
+					"div",
+					{ id: "tabChapters", className: "tab-pane fade in active" },
+					React.createElement(
+						"h3",
+						null,
+						"Chapters"
+					),
+					React.createElement(
+						"div",
+						{ className: "chapter-preview-thumb" },
+						"Chapter"
+					),
+					React.createElement(
+						"div",
+						{ className: "chapter-preview-thumb" },
+						"Chapter"
+					),
+					React.createElement(
+						"div",
+						{ className: "chapter-preview-thumb" },
+						"Chapter"
+					),
+					React.createElement(
+						"div",
+						{ className: "chapter-preview-thumb" },
+						"Chapter"
+					),
+					React.createElement(
+						"div",
+						{ className: "chapter-preview-thumb" },
+						"Chapter"
+					)
+				),
+				React.createElement(
+					"div",
+					{ id: "tabLocations", className: "tab-pane fade" },
+					React.createElement(
+						"h3",
+						null,
+						"Locations"
+					),
+					React.createElement(
+						"div",
+						{ className: "location-preview-thumb" },
+						"Location"
+					),
+					React.createElement(
+						"div",
+						{ className: "location-preview-thumb" },
+						"Location"
+					),
+					React.createElement(
+						"div",
+						{ className: "location-preview-thumb" },
+						"Location"
+					)
+				),
+				React.createElement(
+					"div",
+					{ id: "tabCharacters", className: "tab-pane fade" },
+					React.createElement(
+						"h3",
+						null,
+						"Characters"
+					),
+					React.createElement(
+						"div",
+						{ className: "character-preview-thumb" },
+						"Characters"
+					),
+					React.createElement(
+						"div",
+						{ className: "character-preview-thumb" },
+						"Characters"
+					),
+					React.createElement(
+						"div",
+						{ className: "character-preview-thumb" },
+						"Characters"
+					),
+					React.createElement(
+						"div",
+						{ className: "character-preview-thumb" },
+						"Characters"
+					)
+				)
 			)
 		);
 	}
