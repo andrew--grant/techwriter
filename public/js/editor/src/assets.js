@@ -7,8 +7,7 @@ var Assets = React.createClass({
 		return {};
 	},
 
-	componentDidMount: function () {
-
+	componentDidMount: function () { 
 	},
 
 	render: function () {
@@ -16,9 +15,9 @@ var Assets = React.createClass({
 			<div>
 				<div id="asset-header">
 					<ul className="nav nav-tabs">
-						<li className="active"><a data-toggle="tab" href="#tabChapters">Chapters</a></li>
-						<li><a data-toggle="tab" href="#tabLocations">Locations</a></li>
-						<li><a data-toggle="tab" href="#tabCharacters">Characters</a></li>
+						<li className="active"><a data-toggle="tab" href="#tabChapters"><span className="glyphicon glyphicon-book"></span></a></li>
+						<li><a data-toggle="tab" href="#tabLocations"><span className="glyphicon glyphicon-globe"></span></a></li>
+						<li><a data-toggle="tab" href="#tabCharacters"><span className="glyphicon glyphicon glyphicon-pawn"></span></a></li>
 					</ul>
 				</div>
 				<div className="tab-content">

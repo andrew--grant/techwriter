@@ -19,12 +19,10 @@ var Editor = React.createClass({
 	componentDidMount: function () {
 		var editor = new Quill('#editor-container', {
 			modules: {
-				'toolbar': {container: '#formatting-container'},
-				'link-tooltip': true,
-				'image-tooltip': true
+				'toolbar': {container: '#formatting-container'}
 			},
 			theme: 'snow',
-			poll: 100
+			poll: 200
 		});
 		this.state.editor = editor;
 		this.loadContents();
@@ -46,12 +44,14 @@ var Editor = React.createClass({
 						if (status == "success") {
 							console.log(res.body.content);
 							self.state.editor.setContents(JSON.parse(res.body.content));
-							self.state.editor.focus();
 						} else {
 							console.log("status: " + status);
 						}
-					}
+					} 
 				});
+		}else{
+			// new document 
+			self.state.editor.focus();
 		}
 	},
 
@@ -94,7 +94,6 @@ var Editor = React.createClass({
 		return (
 			<div id="editor-wrapper">
 				<EditorToolbar onSave={this.saveContents}/>
-
 				<div id="editor-container"></div>
 				<NotificationSystem ref="notificationSystem"/>
 			</div>

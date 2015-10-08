@@ -12903,7 +12903,7 @@ var Assets = React.createClass({
 						React.createElement(
 							"a",
 							{ "data-toggle": "tab", href: "#tabChapters" },
-							"Chapters"
+							React.createElement("span", { className: "glyphicon glyphicon-book" })
 						)
 					),
 					React.createElement(
@@ -12912,7 +12912,7 @@ var Assets = React.createClass({
 						React.createElement(
 							"a",
 							{ "data-toggle": "tab", href: "#tabLocations" },
-							"Locations"
+							React.createElement("span", { className: "glyphicon glyphicon-globe" })
 						)
 					),
 					React.createElement(
@@ -12921,7 +12921,7 @@ var Assets = React.createClass({
 						React.createElement(
 							"a",
 							{ "data-toggle": "tab", href: "#tabCharacters" },
-							"Characters"
+							React.createElement("span", { className: "glyphicon glyphicon glyphicon-pawn" })
 						)
 					)
 				)
@@ -13092,12 +13092,10 @@ var Editor = React.createClass({
 	componentDidMount: function componentDidMount() {
 		var editor = new Quill('#editor-container', {
 			modules: {
-				'toolbar': { container: '#formatting-container' },
-				'link-tooltip': true,
-				'image-tooltip': true
+				'toolbar': { container: '#formatting-container' }
 			},
 			theme: 'snow',
-			poll: 100
+			poll: 200
 		});
 		this.state.editor = editor;
 		this.loadContents();
@@ -13118,12 +13116,14 @@ var Editor = React.createClass({
 					if (status == "success") {
 						console.log(res.body.content);
 						self.state.editor.setContents(JSON.parse(res.body.content));
-						self.state.editor.focus();
 					} else {
 						console.log("status: " + status);
 					}
 				}
 			});
+		} else {
+			// new document
+			self.state.editor.focus();
 		}
 	},
 
