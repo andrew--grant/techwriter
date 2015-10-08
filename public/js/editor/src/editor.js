@@ -4,6 +4,19 @@ var superagent = require('superagent');
 var ContrastControl = require('./contrast-control.js');
 var NotificationSystem = require('react-notification-system');
 
+// todo: editor alternatives
+// http://alloyeditor.com/
+// http://summernote.org/
+
+// todo: further research: 
+// http://www.advancedfictionwriting.com/articles/snowflake-method/
+// http://www.advancedfictionwriting.com/product/snowflake-pro-software/
+ 
+// todo: autosaving
+// https://github.com/share/ShareJS
+// http://operational-transformation.github.io/ot-for-javascript.html
+
+
 var Editor = React.createClass({
 
 	getInitialState: function () {
@@ -169,6 +182,7 @@ var EditorToolbar = React.createClass({
 				</div>
 				<div id="editor-toolbar-right">
 					<ContrastControl/>  
+					// todo: auto-save
 					<a onClick={this.props.onSave} href="#" id="save">Save</a> |
 					<a href="#" id="close">Close</a>
 				</div>

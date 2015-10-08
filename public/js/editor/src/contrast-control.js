@@ -1,5 +1,9 @@
 "use strict";
 
+// todo: set/read from local cookie
+// or set as profile on server for
+// cross device support
+
 var ContrastControl = React.createClass({
 
 	getInitialState: function () {

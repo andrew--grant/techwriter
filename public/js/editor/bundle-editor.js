@@ -12878,8 +12878,33 @@ module.exports = function(arr, fn, initial){
 "use strict";
 var superagent = require('superagent');
 
+var AssetHeader = React.createClass({
+	displayName: 'AssetHeader',
+
+	getInitialState: function getInitialState() {
+		return {};
+	},
+
+	render: function render() {
+		return React.createElement(
+			'div',
+			{ className: 'new-asset' },
+			React.createElement(
+				'div',
+				{ className: 'new-asset-title' },
+				this.props.title
+			),
+			React.createElement(
+				'div',
+				{ className: 'new-asset-create' },
+				'New'
+			)
+		);
+	}
+});
+
 var Assets = React.createClass({
-	displayName: "Assets",
+	displayName: 'Assets',
 
 	getInitialState: function getInitialState() {
 		return {};
@@ -12887,134 +12912,128 @@ var Assets = React.createClass({
 
 	componentDidMount: function componentDidMount() {},
 
+	getChapters: function getChapters() {
+		return [{
+			chapteName: 'The Return',
+			chapterid: '123'
+		}, {
+			chapteName: 'Of Men and Mice',
+			chapterid: '111'
+		}, {
+			chapteName: 'Donalds Son',
+			chapterid: '122'
+		}, {
+			chapteName: 'Wild Oats and Young Geese',
+			chapterid: '323'
+		}, {
+			chapteName: 'That Way is The Wrong Way',
+			chapterid: '333'
+		}];
+	},
+
+	getLocations: function getLocations() {
+		return [{
+			location: 'Liverpool, England',
+			locationid: '434'
+		}, {
+			location: 'Derby, England',
+			locationid: '645'
+		}, {
+			location: 'Castle Rock, Maine',
+			locationid: '145'
+		}];
+	},
+
+	getCharacters: function getCharacters() {
+		return [{
+			name: 'Ted Dansing',
+			description: 'Young man, acts old, slightly psychopathic.'
+		}, {
+			name: 'Bill Watts',
+			description: 'Old man, acts young, mentally well balanced.'
+		}];
+	},
+
 	render: function render() {
 		return React.createElement(
-			"div",
+			'div',
 			null,
 			React.createElement(
-				"div",
-				{ id: "asset-header" },
+				'div',
+				{ id: 'asset-header' },
 				React.createElement(
-					"ul",
-					{ className: "nav nav-tabs" },
+					'ul',
+					{ className: 'nav nav-tabs' },
 					React.createElement(
-						"li",
-						{ className: "active" },
+						'li',
+						{ className: 'active' },
 						React.createElement(
-							"a",
-							{ "data-toggle": "tab", href: "#tabChapters" },
-							React.createElement("span", { className: "glyphicon glyphicon-book" })
+							'a',
+							{ 'data-toggle': 'tab', href: '#tabChapters' },
+							React.createElement('span', {
+								className: 'glyphicon glyphicon-book' })
 						)
 					),
 					React.createElement(
-						"li",
+						'li',
 						null,
 						React.createElement(
-							"a",
-							{ "data-toggle": "tab", href: "#tabLocations" },
-							React.createElement("span", { className: "glyphicon glyphicon-globe" })
+							'a',
+							{ 'data-toggle': 'tab', href: '#tabLocations' },
+							React.createElement('span', {
+								className: 'glyphicon glyphicon-globe' })
 						)
 					),
 					React.createElement(
-						"li",
+						'li',
 						null,
 						React.createElement(
-							"a",
-							{ "data-toggle": "tab", href: "#tabCharacters" },
-							React.createElement("span", { className: "glyphicon glyphicon glyphicon-pawn" })
+							'a',
+							{ 'data-toggle': 'tab', href: '#tabCharacters' },
+							React.createElement('span', {
+								className: 'glyphicon glyphicon glyphicon-pawn' })
 						)
 					)
 				)
 			),
 			React.createElement(
-				"div",
-				{ className: "tab-content" },
+				'div',
+				{ className: 'tab-content' },
 				React.createElement(
-					"div",
-					{ id: "tabChapters", className: "tab-pane fade in active" },
-					React.createElement(
-						"h3",
-						null,
-						"Chapters"
-					),
-					React.createElement(
-						"div",
-						{ className: "chapter-preview-thumb" },
-						"Chapter"
-					),
-					React.createElement(
-						"div",
-						{ className: "chapter-preview-thumb" },
-						"Chapter"
-					),
-					React.createElement(
-						"div",
-						{ className: "chapter-preview-thumb" },
-						"Chapter"
-					),
-					React.createElement(
-						"div",
-						{ className: "chapter-preview-thumb" },
-						"Chapter"
-					),
-					React.createElement(
-						"div",
-						{ className: "chapter-preview-thumb" },
-						"Chapter"
-					)
+					'div',
+					{ id: 'tabChapters', className: 'tab-pane fade in active' },
+					React.createElement(AssetHeader, { title: 'Chapters' }),
+					this.getChapters().map(function (i) {
+						return React.createElement(
+							'div',
+							{ className: 'chapter-preview-thumb' },
+							i.chapteName
+						);
+					})
 				),
 				React.createElement(
-					"div",
-					{ id: "tabLocations", className: "tab-pane fade" },
-					React.createElement(
-						"h3",
-						null,
-						"Locations"
-					),
-					React.createElement(
-						"div",
-						{ className: "location-preview-thumb" },
-						"Location"
-					),
-					React.createElement(
-						"div",
-						{ className: "location-preview-thumb" },
-						"Location"
-					),
-					React.createElement(
-						"div",
-						{ className: "location-preview-thumb" },
-						"Location"
-					)
+					'div',
+					{ id: 'tabLocations', className: 'tab-pane fade' },
+					React.createElement(AssetHeader, { title: 'Locations' }),
+					this.getLocations().map(function (i) {
+						return React.createElement(
+							'div',
+							{ className: 'location-preview-thumb' },
+							i.location
+						);
+					})
 				),
 				React.createElement(
-					"div",
-					{ id: "tabCharacters", className: "tab-pane fade" },
-					React.createElement(
-						"h3",
-						null,
-						"Characters"
-					),
-					React.createElement(
-						"div",
-						{ className: "character-preview-thumb" },
-						"Characters"
-					),
-					React.createElement(
-						"div",
-						{ className: "character-preview-thumb" },
-						"Characters"
-					),
-					React.createElement(
-						"div",
-						{ className: "character-preview-thumb" },
-						"Characters"
-					),
-					React.createElement(
-						"div",
-						{ className: "character-preview-thumb" },
-						"Characters"
-					)
+					'div',
+					{ id: 'tabCharacters', className: 'tab-pane fade' },
+					React.createElement(AssetHeader, { title: 'Characters' }),
+					this.getCharacters().map(function (i) {
+						return React.createElement(
+							'div',
+							{ className: 'character-preview-thumb' },
+							i.name
+						);
+					})
 				)
 			)
 		);
@@ -13025,6 +13044,10 @@ React.render(React.createElement(Assets, null), document.getElementById('assetsM
 
 },{"superagent":10}],14:[function(require,module,exports){
 "use strict";
+
+// todo: set/read from local cookie
+// or set as profile on server for
+// cross device support
 
 var ContrastControl = React.createClass({
 	displayName: 'ContrastControl',
@@ -13075,6 +13098,18 @@ var Quill = require('quill');
 var superagent = require('superagent');
 var ContrastControl = require('./contrast-control.js');
 var NotificationSystem = require('react-notification-system');
+
+// todo: editor alternatives
+// http://alloyeditor.com/
+// http://summernote.org/
+
+// todo: further research:
+// http://www.advancedfictionwriting.com/articles/snowflake-method/
+// http://www.advancedfictionwriting.com/product/snowflake-pro-software/
+
+// todo: autosaving
+// https://github.com/share/ShareJS
+// http://operational-transformation.github.io/ot-for-javascript.html
 
 var Editor = React.createClass({
 	displayName: 'Editor',
@@ -13278,6 +13313,7 @@ var EditorToolbar = React.createClass({
 				'div',
 				{ id: 'editor-toolbar-right' },
 				React.createElement(ContrastControl, null),
+				'// todo: auto-save',
 				React.createElement(
 					'a',
 					{ onClick: this.props.onSave, href: '#', id: 'save' },
