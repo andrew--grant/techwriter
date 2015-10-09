@@ -38,9 +38,8 @@ body {
 #asset-header {
   background-color: #f5f5f5; }
   #asset-header .nav-tabs {
-    padding-left: 10px;
-    padding-top: 3px;
-    border-bottom: 1px solid #ccc; }
+    padding-left: 25%;
+    padding-top: 3px; }
 
 .contrast1 {
   background-color: #f8f8f8; }
@@ -57,8 +56,6 @@ body {
   .contrast3 li.active a {
     background-color: #a0a0a0;
     color: #f8f8f8; }
-  .contrast3 .no-left-padding {
-    border-left: 1px solid #bbb; }
 
 .contrast4 {
   background-color: #303030;
@@ -71,11 +68,10 @@ body {
   background-color: #fff; }
   .contrast5 li.active a {
     background-color: #fff; }
-  .contrast5 .no-left-padding {
-    border-left: 1px solid #ddd; }
 
 .tab-content {
-  border-left: 1px solid #ccc; }
+  border-left: 1px solid #ccc;
+  border-top: 1px solid transparent; }
   .tab-content h3 {
     text-align: center; }
 
