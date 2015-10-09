@@ -26,7 +26,7 @@ body {
 #content-container {
   margin: auto;
   width: 100%;
-  height: 90%;
+  height: 100%;
 }
 
 .no-left-padding {
@@ -65,6 +65,24 @@ body {
 
   }
 }
+.container-fluid-row{ 
+  //background-color: ghostwhite; 
+} 
+//.no-right-padding{height:100% ;}
+//#editorMount{height:100% ;}
+//#editor-wrapper{height:100% ;}
+//#editor-container{
+//  height:100%  !important;
+//  .ql-editor {
+//	width:80%;
+//	padding: 15px;
+//	margin: auto;
+//	background-color: ghostwhite;
+//	height:100%;
+//  } 
+//} 
+//.ql-container { 
+//}
 
 #asset-header {
   padding-top: 3px;
@@ -94,7 +112,7 @@ body {
   $contrast3-bgcolor: #a0a0a0;
   $contrast3-color: #f8f8f8;
   background-color: $contrast3-bgcolor;
-  
+
   li.active a {
 	background-color: $contrast3-bgcolor;
 	color: $contrast3-color;
@@ -105,13 +123,13 @@ body {
   }
 
   //.chapter-preview-thumb {
-	//background-color: red;
+  //background-color: red;
   //}
   //.location-preview-thumb {
-	//background-color: red;
+  //background-color: red;
   //}
   //.character-preview-thumb {
-	//background-color: red;
+  //background-color: red;
   //}
 }
 

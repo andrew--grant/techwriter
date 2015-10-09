@@ -12885,6 +12885,25 @@ var AssetHeader = React.createClass({
 		return {};
 	},
 
+	newClicked: function newClicked() {
+
+		switch (this.props.title) {
+
+			case 'Chapters':
+				console.log("Chapters");
+				break;
+
+			case 'Locations':
+				console.log("Locations");
+				break;
+
+			case 'Characters':
+				console.log("Characters");
+				break;
+
+		}
+	},
+
 	render: function render() {
 		return React.createElement(
 			'div',
@@ -12897,7 +12916,11 @@ var AssetHeader = React.createClass({
 			React.createElement(
 				'div',
 				{ className: 'new-asset-create' },
-				'New'
+				React.createElement(
+					'a',
+					{ href: '#', onClick: this.newClicked },
+					'New'
+				)
 			)
 		);
 	}
@@ -12947,14 +12970,39 @@ var Assets = React.createClass({
 	getCharacters: function getCharacters() {
 		return [{
 			name: 'Ted Dansing',
-			description: 'Young man, acts old, slightly psychopathic.'
+			description: 'Young man, acts old, slightly psychopathic.',
+			characterid: '111'
 		}, {
 			name: 'Bill Watts',
-			description: 'Old man, acts young, mentally well balanced.'
+			description: 'Old man, acts young, mentally well balanced.',
+			characterid: '121'
 		}];
 	},
 
+	editClicked: function editClicked(id, assetType, evt) {
+
+		evt.preventDefault();
+		console.log("id " + id);
+		console.log("assetType " + assetType);
+
+		switch (this.props.title) {
+
+			case 'Chapters':
+				console.log("Chapters");
+				break;
+
+			case 'Locations':
+				console.log("Locations");
+				break;
+
+			case 'Characters':
+				console.log("Characters");
+				break;
+		}
+	},
+
 	render: function render() {
+		var self = this;
 		return React.createElement(
 			'div',
 			null,
@@ -12969,7 +13017,7 @@ var Assets = React.createClass({
 						{ className: 'active' },
 						React.createElement(
 							'a',
-							{ 'data-toggle': 'tab', href: '#tabChapters' },
+							{ 'data-toggle': 'tab', href: '#tabChapters', title: 'Chapters' },
 							React.createElement('span', {
 								className: 'glyphicon glyphicon-book' })
 						)
@@ -12979,7 +13027,7 @@ var Assets = React.createClass({
 						null,
 						React.createElement(
 							'a',
-							{ 'data-toggle': 'tab', href: '#tabLocations' },
+							{ 'data-toggle': 'tab', href: '#tabLocations', title: 'Locations' },
 							React.createElement('span', {
 								className: 'glyphicon glyphicon-globe' })
 						)
@@ -12989,7 +13037,7 @@ var Assets = React.createClass({
 						null,
 						React.createElement(
 							'a',
-							{ 'data-toggle': 'tab', href: '#tabCharacters' },
+							{ 'data-toggle': 'tab', href: '#tabCharacters', title: 'Characters' },
 							React.createElement('span', {
 								className: 'glyphicon glyphicon glyphicon-pawn' })
 						)
@@ -13006,8 +13054,13 @@ var Assets = React.createClass({
 					this.getChapters().map(function (i) {
 						return React.createElement(
 							'div',
-							{ className: 'chapter-preview-thumb' },
-							i.chapteName
+							{ className: 'chapter-preview-thumb', key: i.chapterid },
+							React.createElement(
+								'a',
+								{ href: '#',
+									onClick: self.editClicked.bind(self, i.chapterid, 'chapter') },
+								i.chapteName
+							)
 						);
 					})
 				),
@@ -13018,8 +13071,13 @@ var Assets = React.createClass({
 					this.getLocations().map(function (i) {
 						return React.createElement(
 							'div',
-							{ className: 'location-preview-thumb' },
-							i.location
+							{ className: 'location-preview-thumb', key: i.locationid },
+							React.createElement(
+								'a',
+								{ href: '#',
+									onClick: self.editClicked.bind(self, i.locationid, 'location') },
+								i.location
+							)
 						);
 					})
 				),
@@ -13030,8 +13088,13 @@ var Assets = React.createClass({
 					this.getCharacters().map(function (i) {
 						return React.createElement(
 							'div',
-							{ className: 'character-preview-thumb' },
-							i.name
+							{ className: 'character-preview-thumb', key: i.characterid },
+							React.createElement(
+								'a',
+								{ href: '#',
+									onClick: self.editClicked.bind(self, i.characterid, 'character') },
+								i.name
+							)
 						);
 					})
 				)
@@ -13163,6 +13226,7 @@ var Editor = React.createClass({
 	},
 
 	saveContents: function saveContents(evt) {
+		// todo: local saves offline??
 		var self = this;
 		var contents = this.state.editor.getContents();
 		console.log(JSON.stringify(this.state.editor.getContents()));
@@ -13176,6 +13240,11 @@ var Editor = React.createClass({
 				self.succesfullSaveNotification();
 			}
 		});
+	},
+
+	closeEditor: function closeEditor() {
+		// todo: snapshot save / warnings etc
+		location.href = "/";
 	},
 
 	succesfullSaveNotification: function succesfullSaveNotification() {
@@ -13199,7 +13268,8 @@ var Editor = React.createClass({
 		return React.createElement(
 			'div',
 			{ id: 'editor-wrapper' },
-			React.createElement(EditorToolbar, { onSave: this.saveContents }),
+			React.createElement(EditorToolbar, { onSave: this.saveContents,
+				onClose: this.closeEditor }),
 			React.createElement('div', { id: 'editor-container' }),
 			React.createElement(NotificationSystem, { ref: 'notificationSystem' })
 		);
@@ -13313,7 +13383,6 @@ var EditorToolbar = React.createClass({
 				'div',
 				{ id: 'editor-toolbar-right' },
 				React.createElement(ContrastControl, null),
-				'// todo: auto-save',
 				React.createElement(
 					'a',
 					{ onClick: this.props.onSave, href: '#', id: 'save' },
@@ -13322,7 +13391,7 @@ var EditorToolbar = React.createClass({
 				' |',
 				React.createElement(
 					'a',
-					{ href: '#', id: 'close' },
+					{ onClick: this.props.onClose, href: '#', id: 'close' },
 					'Close'
 				)
 			)

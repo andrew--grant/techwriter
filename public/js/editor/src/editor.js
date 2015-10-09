@@ -11,7 +11,7 @@ var NotificationSystem = require('react-notification-system');
 // todo: further research: 
 // http://www.advancedfictionwriting.com/articles/snowflake-method/
 // http://www.advancedfictionwriting.com/product/snowflake-pro-software/
- 
+
 // todo: autosaving
 // https://github.com/share/ShareJS
 // http://operational-transformation.github.io/ot-for-javascript.html
@@ -60,15 +60,16 @@ var Editor = React.createClass({
 						} else {
 							console.log("status: " + status);
 						}
-					} 
+					}
 				});
-		}else{
+		} else {
 			// new document 
 			self.state.editor.focus();
 		}
 	},
 
 	saveContents: function (evt) {
+		// todo: local saves offline??
 		var self = this;
 		var contents = this.state.editor.getContents();
 		console.log(JSON.stringify(this.state.editor.getContents()));
@@ -84,6 +85,12 @@ var Editor = React.createClass({
 					self.succesfullSaveNotification();
 				}
 			});
+	},
+
+	closeEditor: function () {
+		// todo: snapshot save / warnings etc
+		location.href = "/";
+
 	},
 
 	succesfullSaveNotification: function () {
@@ -106,7 +113,9 @@ var Editor = React.createClass({
 	render: function () {
 		return (
 			<div id="editor-wrapper">
-				<EditorToolbar onSave={this.saveContents}/>
+				<EditorToolbar onSave={this.saveContents}
+							   onClose={this.closeEditor}/>
+
 				<div id="editor-container"></div>
 				<NotificationSystem ref="notificationSystem"/>
 			</div>
@@ -181,10 +190,9 @@ var EditorToolbar = React.createClass({
 
 				</div>
 				<div id="editor-toolbar-right">
-					<ContrastControl/>  
-					// todo: auto-save
+					<ContrastControl/>
 					<a onClick={this.props.onSave} href="#" id="save">Save</a> |
-					<a href="#" id="close">Close</a>
+					<a onClick={this.props.onClose} href="#" id="close">Close</a>
 				</div>
 			</div>
 		);
