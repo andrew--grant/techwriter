@@ -1,8 +1,14 @@
+// ------------------ variables --------------------/
+
 $color-bar-primary: #ccc;
 $color-bar-secondary: #ccc;
+$color-heading-strip: #f5f5f5;
+// toolbar and asset header
 $color-picker-label: #fbfbfb !important;
 $toolbar-height: 45px;
 $bg-color: #fff;
+
+// ------------------ general / misc --------------------/
 
 html, body {
   height: 100%;
@@ -23,16 +29,10 @@ body {
   height: 100%;
 }
 
-#content-container {
-  margin: auto;
-  width: 100%;
-  height: 100%;
-}
-
 .no-left-padding {
   padding-left: 0;
   height: 100%;
-  border-left: 1px solid $color-bar-secondary;
+  //border-left: 1px solid $color-bar-secondary;
 }
 
 .no-right-padding {
@@ -41,54 +41,39 @@ body {
 
 // ------------------ editor toolbar --------------------/
 
-#formatting-container, #asset-header {
-  background-color: #f5f5f5;
-  border-bottom: 1px solid $color-bar-secondary;
-  padding: 10px;
-  height: $toolbar-height;
+#editor-toolbar {
+  // position: fixed;
 
-  #editor-toolbar-left {
-	width: 50%;
-	height: 100%;
-	float: left;
-  }
+  #formatting-container {
+	background-color: $color-heading-strip;
+	border-bottom: 1px solid $color-bar-secondary;
+	padding: 10px;
+	height: $toolbar-height;
 
-  #editor-toolbar-right {
-	width: 50%;
-	height: 100%;
-	float: left;
-	text-align: right;
-  }
+	#editor-toolbar-left {
+	  width: 50%;
+	  height: 100%;
+	  float: left;
+	}
 
-  .nav-tabs {
-	border-bottom: none;
-
+	#editor-toolbar-right {
+	  width: 50%;
+	  height: 100%;
+	  float: left;
+	  text-align: right;
+	}
   }
 }
-.container-fluid-row{ 
-  //background-color: ghostwhite; 
-} 
-//.no-right-padding{height:100% ;}
-//#editorMount{height:100% ;}
-//#editor-wrapper{height:100% ;}
-//#editor-container{
-//  height:100%  !important;
-//  .ql-editor {
-//	width:80%;
-//	padding: 15px;
-//	margin: auto;
-//	background-color: ghostwhite;
-//	height:100%;
-//  } 
-//} 
-//.ql-container { 
-//}
 
 #asset-header {
-  padding-top: 3px;
-}
+  background-color: $color-heading-strip;
+  .nav-tabs {
+	padding-left: 10px;
+	padding-top: 3px;
+	border-bottom: 1px solid $color-bar-secondary;
+  }
 
-// -------------------------------------------------------/
+}
 
 // ------------------ contrast levels --------------------/
 
@@ -154,12 +139,20 @@ body {
   }
 }
 
-// -------------------------------------------------------/
+// ------------------ todo: oragnise into better commented sections? -------------------------/
 
 .tab-content {
+  //todo: extend border to top? (remove padding/margin on asset content
+  border-left: 1px solid $color-bar-secondary;
+
   h3 {
 	text-align: center;
   }
+}
+
+#assetsMount {
+  //border-left: 1px solid #ccc;
+
 }
 
 .asset-box {
@@ -203,11 +196,11 @@ body {
   background-color: #fff6de;
 }
 
-#editor-container {
+#quill {
   min-height: 300px;
   // start text a bit lower 
   // down, away from the toolbar
-  padding-top: 25px;
+  padding: 80px 80px 125px 125px;
   overflow: hidden;
   height: 100%;
 }
