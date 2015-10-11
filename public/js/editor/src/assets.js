@@ -165,7 +165,4 @@ var Assets = React.createClass({
 	}
 });
 
-React.render(
-	<Assets/>,
-	document.getElementById('assetsMount')
-); 
+module.exports = Assets;

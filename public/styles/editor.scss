@@ -19,6 +19,10 @@ body {
 }
 
 .container-fluid {
+  // to appear below fixed top elements
+  position:relative;
+  top:10px;
+
   padding: 0;
   margin: 0;
   height: 100%;
@@ -39,11 +43,25 @@ body {
   padding-right: 0;
 }
 
+#editor{
+  width:80%;
+  height:100%;
+  margin:auto;
+  margin-top:60px;
+  background-color: #33acfe;
+}
+
+
+
+
+
+
 // ------------------ editor toolbar --------------------/
 
 #editor-toolbar {
-  // position: fixed;
-
+  position: fixed;
+  z-index: 1010;
+  width:75%;
   #formatting-container {
 	background-color: $color-heading-strip;
 	border-bottom: 1px solid $color-bar-secondary;
@@ -65,7 +83,9 @@ body {
   }
 }
 
-#asset-header {
+#asset-header {position: fixed;
+  z-index: 1020;
+  width:30%;
   background-color: $color-heading-strip;
   //border-bottom: 1px solid $color-bar-secondary;
   .nav-tabs {
@@ -147,13 +167,19 @@ body {
   //todo: extend border to top? (remove padding/margin on asset content
   border-left: 1px solid $color-bar-secondary;
   border-top: 1px solid transparent;
+  
   h3 {
 	text-align: center;
   }
 }
+#editorMount {
+  //border-left: 1px solid #ccc;
+  //position: fixed;
 
+}
 #assetsMount {
   //border-left: 1px solid #ccc;
+  //position: static;
 
 }
 
@@ -166,6 +192,7 @@ body {
 
 .new-asset {
   @extend .asset-box;
+  margin-top: 60px;
   height: 60px;
   background-color: #ffd900;
 

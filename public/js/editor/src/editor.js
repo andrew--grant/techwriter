@@ -3,6 +3,7 @@ var Quill = require('quill');
 var EditorToolbar = require('./editor-toolbar.js');
 var superagent = require('superagent');
 var NotificationSystem = require('react-notification-system');
+var Assets = require('./assets.js');
 
 // todo: editor alternatives
 // http://alloyeditor.com/
@@ -112,20 +113,21 @@ var Editor = React.createClass({
 
 	render: function () {
 
-		return ( 
+		return (
 			<div id="editor-wrapper">
-
+				<div className="col-md-9 no-right-padding">
+					<div id="editor">
+						<div id="quill"></div>
+					</div>
+				</div>
+				<div className="col-md-3 no-left-padding">
+					<Assets/>
+				</div>
 				<div id='editor-toolbar'>
 					<EditorToolbar onSave={this.saveContents} onClose={this.closeEditor}/>
 				</div>
-
-				<div id="editor">
-					<div id="quill"></div>
-				</div>
-
 				<NotificationSystem ref="notificationSystem"/>
-				 
-			</div>  
+			</div>
 		);
 
 	}

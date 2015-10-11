@@ -4,6 +4,10 @@
 // or set as profile on server for
 // cross device support
 
+
+// todo: control for line and word spacing adjustment
+
+
 var ContrastControl = React.createClass({
 
 	getInitialState: function () {
