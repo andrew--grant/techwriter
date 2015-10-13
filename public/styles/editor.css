@@ -5880,20 +5880,14 @@ html, body {
     padding-right: 0; }
     .container-header .assets-nav-wrapper .nav-tabs {
       border-bottom: 1px solid black; }
-      .container-header .assets-nav-wrapper .nav-tabs li a {
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-        -ms-border-radius: 0;
-        border-radius: 0; }
-
-.nav-tabs > li > a {
-  border: 1px solid black; }
-
-.nav-tabs > li > a.active {
-  border-bottom-color: transparent; }
 
 .nav-tabs > li.active > a {
+  background-color: #C2D5F2;
+  border: 1px solid black;
   border-bottom-color: transparent; }
+
+.nav-tabs > li > a {
+  border-bottom: 1px solid black; }
 
 .container-main {
   padding-top: 62px;
