@@ -67,16 +67,17 @@ var EditorToolbar = React.createClass({
 					<span title="Underline" className="ql-format-button ql-underline"></span>
 					<span className="ql-format-separator"></span>
 					<span title="Strikethrough" className="ql-format-button ql-strike"></span>
-
 				</div>
 				<div id="editor-toolbar-right">
-					<ContrastControl/>
-					<a onClick={this.props.onSave} href="#" id="save">Save</a> |
-					<a onClick={this.props.onClose} href="#" id="close">Close</a>
+					
 				</div>
 			</div>
 		);
 	}
 });
 
-module.exports = EditorToolbar;
+//module.exports = EditorToolbar;
+React.render(
+	<EditorToolbar/>,
+	document.getElementById('editor-toolbar')
+); 

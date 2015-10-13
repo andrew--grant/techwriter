@@ -1,243 +1,116 @@
-// ------------------ variables --------------------/
+@import "bootstrap/bootstrap";
 
-$color-bar-primary: #ccc;
+// ------------------ variables --------------------/ 
+$color-background: white;
+//todo: set a good default for above or remove if not visible/needed 
+$color-container-header-bg: #eee;
+$color-container-header: #000;
 $color-bar-secondary: #ccc;
+$color-editor-wrapper: #fafafa;
 $color-heading-strip: #f5f5f5;
-// toolbar and asset header
 $color-picker-label: #fbfbfb !important;
-$toolbar-height: 45px;
-$bg-color: #fff;
+$color-active-tab-and-tab-contents: #C2D5F2;
+$color-tab-border:black;// #fbfbfb;
 
-// ------------------ general / misc --------------------/
+$toolbar-height: 42px;
 
+// ------------------ mix-ins --------------------/ 
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+// ------------------ variables --------------------/ 
 html, body {
   height: 100%;
-}
-
-body {
-  background-color: $bg-color;
-}
-
-.container-fluid {
-  // to appear below fixed top elements
-  position:relative;
-  top:10px;
-
-  padding: 0;
-  margin: 0;
-  height: 100%;
-  overflow-x: hidden;
-}
-
-.container-fluid-row {
-  height: 100%;
-}
-
-.no-left-padding {
-  padding-left: 0;
-  height: 100%;
-  //border-left: 1px solid $color-bar-secondary;
-}
-
-.no-right-padding {
-  padding-right: 0;
-}
-
-#editor{
-  width:80%;
-  height:100%;
-  margin:auto;
-  margin-top:60px;
-  background-color: #33acfe;
-}
-
-
-
-
-
-
-// ------------------ editor toolbar --------------------/
-
-#editor-toolbar {
-  position: fixed;
-  z-index: 1010;
-  width:75%;
-  #formatting-container {
-	background-color: $color-heading-strip;
-	border-bottom: 1px solid $color-bar-secondary;
-	padding: 10px;
-	height: $toolbar-height;
-
-	#editor-toolbar-left {
-	  width: 50%;
-	  height: 100%;
-	  float: left;
-	}
-
-	#editor-toolbar-right {
-	  width: 50%;
-	  height: 100%;
-	  float: left;
-	  text-align: right;
-	}
-  }
-}
-
-#asset-header {position: fixed;
-  z-index: 1020;
-  width:30%;
-  background-color: $color-heading-strip;
-  //border-bottom: 1px solid $color-bar-secondary;
-  .nav-tabs {
-	padding-left: 25%;//px;
-	padding-top: 3px;
-	//width: 75%;
-	//margin: auto;
-  }
-
-}
-
-// ------------------ contrast levels --------------------/
-
-.contrast1 {
-  $contrast1-bgcolor: #f8f8f8;
-  background-color: $contrast1-bgcolor;
-  li.active a {
-	background-color: $contrast1-bgcolor;
-  }
-}
-
-.contrast2 {
-  $contrast2-bgcolor: #e0e0e0;
-  background-color: $contrast2-bgcolor;
-  li.active a {
-	background-color: $contrast2-bgcolor;
-  }
-}
-
-.contrast3 {
-  $contrast3-bgcolor: #a0a0a0;
-  $contrast3-color: #f8f8f8;
-  background-color: $contrast3-bgcolor;
-
-  li.active a {
-	background-color: $contrast3-bgcolor;
-	color: $contrast3-color;
-  }
-
-  .no-left-padding {
-	//border-left: 1px solid #bbb;
-  }
-
-  //.chapter-preview-thumb {
-  //background-color: red;
-  //}
-  //.location-preview-thumb {
-  //background-color: red;
-  //}
-  //.character-preview-thumb {
-  //background-color: red;
-  //}
-}
-
-.contrast4 {
-  $contrast4-bgcolor: #303030;
-  $contrast4-color: #fff;
-  background-color: $contrast4-bgcolor;
-  color: $contrast4-color;
-  li.active a {
-	background-color: $contrast4-bgcolor;
-	color: $contrast4-color;
-  }
-}
-
-.contrast5 {
-  background-color: $bg-color;
-  li.active a {
-	background-color: $bg-color;
-  }
-  .no-left-padding {
-	//border-left: 1px solid #ddd;
-  }
-}
-
-// ------------------ todo: oragnise into better commented sections? -------------------------/
-
-.tab-content {
-  //todo: extend border to top? (remove padding/margin on asset content
-  border-left: 1px solid $color-bar-secondary;
-  border-top: 1px solid transparent;
-  
-  h3 {
-	text-align: center;
-  }
-}
-#editorMount {
-  //border-left: 1px solid #ccc;
-  //position: fixed;
-
-}
-#assetsMount {
-  //border-left: 1px solid #ccc;
-  //position: static;
-
-}
-
-.asset-box {
-  margin: 10px auto auto auto;
-  padding: 10px;
-  width: 90%;
-  text-align: center;
-}
-
-.new-asset {
-  @extend .asset-box;
-  margin-top: 60px;
-  height: 60px;
-  background-color: #ffd900;
-
-  .new-asset-title {
-	width: 50%;
-	float: left;
-  }
-
-  .new-asset-create {
-	width: 50%;
-	float: left;
-  }
-
-}
-
-.chapter-preview-thumb, .location-preview-thumb, .character-preview-thumb {
-  @extend .asset-box;
-  height: 120px;
-}
-
-.character-preview-thumb {
-  background-color: #f2b866;
-}
-
-.chapter-preview-thumb {
-  background-color: #f5f5f5;
-}
-
-.location-preview-thumb {
-  background-color: #fff6de;
-}
-
-#quill {
-  min-height: 300px;
-  // start text a bit lower 
-  // down, away from the toolbar
-  padding: 80px 80px 125px 125px;
   overflow: hidden;
-  height: 100%;
+  background-color: $color-background;
 }
 
-#editor-wrapper {
-  height: 100%;
+.container-header {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  width: 100%;
+  background-color: $color-container-header-bg;
+  color: $color-container-header;
+
+  .main-header-row { 
+	overflow: hidden;
+  }
+
+  .editor-tools-wrapper, .assets-nav-wrapper {
+	height: $toolbar-height; 
+	background-color: $color-container-header-bg;
+  }
+
+  .assets-nav-wrapper {
+	padding-left: 0;
+	padding-right: 0;
+	.nav {  
+	  //width:100%;
+	  //margin:auto;
+	} 
+	
+	.nav-tabs{
+	  border-bottom:1px solid $color-tab-border;
+	  li{
+		a{
+		  @include border-radius(0);
+		  //margin-top:2px;
+		}
+	  } 
+	}
+  }
 }
 
-.ql-picker-label {
-  background-color: $color-picker-label;
+// ------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+.nav-tabs > li > a{
+  //background-color: $color-active-tab-and-tab-contents;
+  border: 1px solid $color-tab-border;
 }
+
+.nav-tabs > li > a.active{
+  border-bottom-color: transparent;
+}
+
+.nav-tabs > li.active > a{
+  //background-color: $color-active-tab-and-tab-contents; 
+  border-bottom-color: transparent;
+}
+
+
+.nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+  
+}
+
+
+.container-main {
+  padding-top: 62px; // todo: 42
+  width: 100%;
+  height: 100%;
+
+  .row {
+	height: 100%;
+  }
+
+  .editor-wrapper {
+	background-color: $color-editor-wrapper;
+	height: 100%;
+	overflow: auto; 
+  }
+
+  .assets-wrapper {
+	height: 100%;
+	overflow: auto;
+	background-color: $color-active-tab-and-tab-contents;
+	border-left: solid 1px $color-tab-border;
+	//border-top: solid 1px $color-active-tab-border;
+  }
+
+}
+
+

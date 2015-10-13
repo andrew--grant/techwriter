@@ -10650,7 +10650,6 @@ var Helpers = {
 module.exports = Helpers;
 
 },{}],5:[function(require,module,exports){
-//var React = require('react');
 var NotificationItem = require('./notification-item');
 var Constants = require('./constants');
 var Helpers = require('./helpers');
@@ -10706,11 +10705,9 @@ var NotificationContainer = React.createClass({displayName: "NotificationContain
 module.exports = NotificationContainer;
 
 },{"./constants":3,"./helpers":4,"./notification-item":6}],6:[function(require,module,exports){
-//var React = require('react');
 var Constants = require('./constants');
 var Styles = require('./styles');
 var Helpers = require('./helpers');
-var merge = require('object-assign');
 
 var NotificationItem = React.createClass({displayName: "NotificationItem",
 
@@ -10917,8 +10914,6 @@ var NotificationItem = React.createClass({displayName: "NotificationItem",
 
     var className = 'notification notification-' + notification.level;
 
-    var notificationStyle = merge({}, this._styles.notification);
-
     if (this.state.visible) {
       className = className + ' notification-visible';
     } else {
@@ -10932,22 +10927,22 @@ var NotificationItem = React.createClass({displayName: "NotificationItem",
     if (this.props.getStyles.overrideStyle) {
       var cssByPos = this._getCssPropertyByPosition();
       if (!this.state.visible && !this.state.removed) {
-        notificationStyle[cssByPos.property] = cssByPos.value;
+        this._styles.notification[cssByPos.property] = cssByPos.value;
       }
 
       if (this.state.visible && !this.state.removed) {
-        notificationStyle.height = this._height;
-        notificationStyle[cssByPos.property] = 0;
+        this._styles.notification.height = this._height;
+        this._styles.notification[cssByPos.property] = 0;
       }
 
       if (this.state.removed) {
-        notificationStyle.overlay = 'hidden';
-        notificationStyle.height = 0;
-        notificationStyle.marginTop = 0;
-        notificationStyle.paddingTop = 0;
-        notificationStyle.paddingBottom = 0;
+        this._styles.notification.overlay = 'hidden';
+        this._styles.notification.height = 0;
+        this._styles.notification.marginTop = 0;
+        this._styles.notification.paddingTop = 0;
+        this._styles.notification.paddingBottom = 0;
       }
-      notificationStyle.opacity = this.state.visible ? this._styles.notification.isVisible.opacity : this._styles.notification.isHidden.opacity;
+      this._styles.notification.opacity = this.state.visible ? this._styles.notification.isVisible.opacity : this._styles.notification.isHidden.opacity;
     }
 
     var dismiss = null;
@@ -10984,7 +10979,7 @@ var NotificationItem = React.createClass({displayName: "NotificationItem",
     }
 
     return (
-      React.createElement("div", {className: className, onClick: this._dismiss, style: notificationStyle}, 
+      React.createElement("div", {className: className, onClick: this._dismiss, style: this._styles.notification}, 
         title, 
         message, 
         dismiss, 
@@ -11016,8 +11011,7 @@ function whichTransitionEvent(){
 
 module.exports = NotificationItem;
 
-},{"./constants":3,"./helpers":4,"./styles":8,"object-assign":9}],7:[function(require,module,exports){
-//var React = require('react');
+},{"./constants":3,"./helpers":4,"./styles":8}],7:[function(require,module,exports){
 var merge = require('object-assign');
 var NotificationContainer = require('./notification-container');
 var Constants = require('./constants');
@@ -11148,6 +11142,10 @@ var NotificationSystem = React.createClass({displayName: "NotificationSystem",
 
       if (Object.keys(Constants.levels).indexOf(notification.level) === -1) {
         throw "'"+ notification.level +"' is not a valid level."
+      }
+
+      if (!notification.dismissible && !notification.action) {
+        throw "You need to set notification dismissible to true or set an action, otherwise user will not be able to dismiss the notification."
       }
 
     } catch(err) {
@@ -13268,27 +13266,13 @@ var EditorToolbar = React.createClass({
 				React.createElement('span', { className: 'ql-format-separator' }),
 				React.createElement('span', { title: 'Strikethrough', className: 'ql-format-button ql-strike' })
 			),
-			React.createElement(
-				'div',
-				{ id: 'editor-toolbar-right' },
-				React.createElement(ContrastControl, null),
-				React.createElement(
-					'a',
-					{ onClick: this.props.onSave, href: '#', id: 'save' },
-					'Save'
-				),
-				' |',
-				React.createElement(
-					'a',
-					{ onClick: this.props.onClose, href: '#', id: 'close' },
-					'Close'
-				)
-			)
+			React.createElement('div', { id: 'editor-toolbar-right' })
 		);
 	}
 });
 
-module.exports = EditorToolbar;
+//module.exports = EditorToolbar;
+React.render(React.createElement(EditorToolbar, null), document.getElementById('editor-toolbar'));
 
 },{"./contrast-control.js":14,"quill":2,"superagent":10}],16:[function(require,module,exports){
 "use strict";
@@ -13326,7 +13310,7 @@ var Editor = React.createClass({
 	componentDidMount: function componentDidMount() {
 		var editor = new Quill('#quill', {
 			modules: {
-				'toolbar': { container: '#formatting-container' }
+				'toolbar': { container: '#editor-toolbar' }
 			},
 			theme: 'snow',
 			poll: 200
@@ -13402,35 +13386,12 @@ var Editor = React.createClass({
 
 	render: function render() {
 
-		return React.createElement(
-			'div',
-			{ id: 'editor-wrapper' },
-			React.createElement(
-				'div',
-				{ className: 'col-md-9 no-right-padding' },
-				React.createElement(
-					'div',
-					{ id: 'editor' },
-					React.createElement('div', { id: 'quill' })
-				)
-			),
-			React.createElement(
-				'div',
-				{ className: 'col-md-3 no-left-padding' },
-				React.createElement(Assets, null)
-			),
-			React.createElement(
-				'div',
-				{ id: 'editor-toolbar' },
-				React.createElement(EditorToolbar, { onSave: this.saveContents, onClose: this.closeEditor })
-			),
-			React.createElement(NotificationSystem, { ref: 'notificationSystem' })
-		);
+		return React.createElement('div', { id: 'quill' });
 	}
 
 });
 
-React.render(React.createElement(Editor, null), document.getElementById('editorMount'));
+React.render(React.createElement(Editor, null), document.getElementById('editor'));
 
 },{"./assets.js":13,"./editor-toolbar.js":15,"quill":2,"react-notification-system":7,"superagent":10}],17:[function(require,module,exports){
 "use strict";

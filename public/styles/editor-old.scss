@@ -1,0 +1,243 @@
+// ------------------ variables --------------------/
+
+$color-bar-primary: #ccc;
+$color-bar-secondary: #ccc;
+$color-heading-strip: #f5f5f5;
+// toolbar and asset header
+$color-picker-label: #fbfbfb !important;
+$toolbar-height: 45px;
+$bg-color: #fff;
+
+// ------------------ general / misc --------------------/
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: $bg-color;
+}
+
+.container-fluid {
+  // to appear below fixed top elements
+  position:relative;
+  top:10px;
+
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.container-fluid-row {
+  height: 100%;
+}
+
+.no-left-padding {
+  padding-left: 0;
+  height: 100%;
+  //border-left: 1px solid $color-bar-secondary;
+}
+
+.no-right-padding {
+  padding-right: 0;
+}
+
+#editor{
+  width:80%;
+  height:100%;
+  margin:auto;
+  margin-top:60px;
+  background-color: #33acfe;
+}
+
+
+
+
+
+
+// ------------------ editor toolbar --------------------/
+
+#editor-toolbar {
+  position: fixed;
+  z-index: 1010;
+  width:75%;
+  #formatting-container {
+	background-color: $color-heading-strip;
+	border-bottom: 1px solid $color-bar-secondary;
+	padding: 10px;
+	height: $toolbar-height;
+
+	#editor-toolbar-left {
+	  width: 50%;
+	  height: 100%;
+	  float: left;
+	}
+
+	#editor-toolbar-right {
+	  width: 50%;
+	  height: 100%;
+	  float: left;
+	  text-align: right;
+	}
+  }
+}
+
+#asset-header {position: fixed;
+  z-index: 1020;
+  width:30%;
+  background-color: $color-heading-strip;
+  //border-bottom: 1px solid $color-bar-secondary;
+  .nav-tabs {
+	padding-left: 25%;//px;
+	padding-top: 3px;
+	//width: 75%;
+	//margin: auto;
+  }
+
+}
+
+// ------------------ contrast levels --------------------/
+
+.contrast1 {
+  $contrast1-bgcolor: #f8f8f8;
+  background-color: $contrast1-bgcolor;
+  li.active a {
+	background-color: $contrast1-bgcolor;
+  }
+}
+
+.contrast2 {
+  $contrast2-bgcolor: #e0e0e0;
+  background-color: $contrast2-bgcolor;
+  li.active a {
+	background-color: $contrast2-bgcolor;
+  }
+}
+
+.contrast3 {
+  $contrast3-bgcolor: #a0a0a0;
+  $contrast3-color: #f8f8f8;
+  background-color: $contrast3-bgcolor;
+
+  li.active a {
+	background-color: $contrast3-bgcolor;
+	color: $contrast3-color;
+  }
+
+  .no-left-padding {
+	//border-left: 1px solid #bbb;
+  }
+
+  //.chapter-preview-thumb {
+  //background-color: red;
+  //}
+  //.location-preview-thumb {
+  //background-color: red;
+  //}
+  //.character-preview-thumb {
+  //background-color: red;
+  //}
+}
+
+.contrast4 {
+  $contrast4-bgcolor: #303030;
+  $contrast4-color: #fff;
+  background-color: $contrast4-bgcolor;
+  color: $contrast4-color;
+  li.active a {
+	background-color: $contrast4-bgcolor;
+	color: $contrast4-color;
+  }
+}
+
+.contrast5 {
+  background-color: $bg-color;
+  li.active a {
+	background-color: $bg-color;
+  }
+  .no-left-padding {
+	//border-left: 1px solid #ddd;
+  }
+}
+
+// ------------------ todo: oragnise into better commented sections? -------------------------/
+
+.tab-content {
+  //todo: extend border to top? (remove padding/margin on asset content
+  border-left: 1px solid $color-bar-secondary;
+  border-top: 1px solid transparent;
+  
+  h3 {
+	text-align: center;
+  }
+}
+#editorMount {
+  //border-left: 1px solid #ccc;
+  //position: fixed;
+
+}
+#assetsMount {
+  //border-left: 1px solid #ccc;
+  //position: static;
+
+}
+
+.asset-box {
+  margin: 10px auto auto auto;
+  padding: 10px;
+  width: 90%;
+  text-align: center;
+}
+
+.new-asset {
+  @extend .asset-box;
+  margin-top: 60px;
+  height: 60px;
+  background-color: #ffd900;
+
+  .new-asset-title {
+	width: 50%;
+	float: left;
+  }
+
+  .new-asset-create {
+	width: 50%;
+	float: left;
+  }
+
+}
+
+.chapter-preview-thumb, .location-preview-thumb, .character-preview-thumb {
+  @extend .asset-box;
+  height: 120px;
+}
+
+.character-preview-thumb {
+  background-color: #f2b866;
+}
+
+.chapter-preview-thumb {
+  background-color: #f5f5f5;
+}
+
+.location-preview-thumb {
+  background-color: #fff6de;
+}
+
+#quill {
+  min-height: 300px;
+  // start text a bit lower 
+  // down, away from the toolbar
+  padding: 80px 80px 125px 125px;
+  overflow: hidden;
+  height: 100%;
+}
+
+#editor-wrapper {
+  height: 100%;
+}
+
+.ql-picker-label {
+  background-color: $color-picker-label;
+}

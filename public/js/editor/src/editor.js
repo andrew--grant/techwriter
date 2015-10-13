@@ -33,7 +33,7 @@ var Editor = React.createClass({
 	componentDidMount: function () {
 		var editor = new Quill('#quill', {
 			modules: {
-				'toolbar': {container: '#formatting-container'}
+				'toolbar': {container: '#editor-toolbar'}
 			},
 			theme: 'snow',
 			poll: 200
@@ -114,19 +114,7 @@ var Editor = React.createClass({
 	render: function () {
 
 		return (
-			<div id="editor-wrapper">
-				<div className="col-md-9 no-right-padding">
-					<div id="editor">
-						<div id="quill"></div>
-					</div>
-				</div>
-				<div className="col-md-3 no-left-padding">
-					<Assets/>
-				</div>
-				<div id='editor-toolbar'>
-					<EditorToolbar onSave={this.saveContents} onClose={this.closeEditor}/>
-				</div>
-				<NotificationSystem ref="notificationSystem"/>
+			<div id="quill"> 
 			</div>
 		);
 
@@ -137,5 +125,5 @@ var Editor = React.createClass({
 
 React.render(
 	<Editor/>,
-	document.getElementById('editorMount')
+	document.getElementById('editor')
 ); 
