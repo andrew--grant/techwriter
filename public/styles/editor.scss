@@ -59,7 +59,7 @@ html, body {
 	  li{
 		a{
 		  @include border-radius(0);
-		  //margin-top:2px;
+		  //margin-top:3px;
 		}
 	  } 
 	}
@@ -68,25 +68,22 @@ html, body {
 
 // ------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-.nav-tabs > li > a{
-  //background-color: $color-active-tab-and-tab-contents;
-  border: 1px solid $color-tab-border;
-}
-
-.nav-tabs > li > a.active{
-  border-bottom-color: transparent;
-}
 
 .nav-tabs > li.active > a{
-  //background-color: $color-active-tab-and-tab-contents; 
+  background-color: $color-active-tab-and-tab-contents;
+  border: 1px solid $color-tab-border;
   border-bottom-color: transparent;
 }
 
-
-.nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
-  
+.nav-tabs > li > a{
+  //background-color: $color-active-tab-and-tab-contents; 
+  border-bottom: 1px solid $color-tab-border;
+  //border-bottom-color: transparent;
 }
 
+//.nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+//  
+//}
 
 .container-main {
   padding-top: 62px; // todo: 42
@@ -110,7 +107,4 @@ html, body {
 	border-left: solid 1px $color-tab-border;
 	//border-top: solid 1px $color-active-tab-border;
   }
-
 }
-
-
