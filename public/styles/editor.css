@@ -5880,11 +5880,6 @@ html, body {
     padding-right: 0; }
     .container-header .assets-nav-wrapper .nav-tabs {
       border-bottom: 1px solid black; }
-      .container-header .assets-nav-wrapper .nav-tabs li a {
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-        -ms-border-radius: 0;
-        border-radius: 0; }
 
 .nav-tabs > li.active > a {
   background-color: #C2D5F2;
