@@ -121,22 +121,12 @@ var Assets = React.createClass({
 	render: function () {
 		var self = this;
 		return (
-			<div>
-				<div id="asset-header">
-					<ul className="nav nav-tabs">
-						<li className="active"><a data-toggle="tab" href="#tabChapters" title="Chapters"><span
-							className="glyphicon glyphicon-book"></span></a></li>
-						<li><a data-toggle="tab" href="#tabLocations"  title="Locations"><span
-							className="glyphicon glyphicon-globe"></span></a></li>
-						<li><a data-toggle="tab" href="#tabCharacters"  title="Characters"><span
-							className="glyphicon glyphicon glyphicon-pawn"></span></a></li>
-					</ul>
-				</div>
+			<div> 
 				<div className="tab-content">
 					<div id="tabChapters" className="tab-pane fade in active">
 						<AssetHeader title='Chapters'/>
 						{this.getChapters().map(function (i) {
-							return <div className='chapter-preview-thumb' key={i.chapterid}>
+							return <div className='chapter-preview-thumb preview-thumb' key={i.chapterid}>
 								<a href='#'
 								   onClick={self.editClicked.bind(self, i.chapterid,'chapter')}>{i.chapteName}</a>
 							</div>;
@@ -145,7 +135,7 @@ var Assets = React.createClass({
 					<div id="tabLocations" className="tab-pane fade">
 						<AssetHeader title='Locations'/>
 						{    this.getLocations().map(function (i) {
-							return <div className='location-preview-thumb' key={i.locationid}>
+							return <div className='location-preview-thumb preview-thumb' key={i.locationid}>
 								<a href='#'
 								   onClick={self.editClicked.bind(self, i.locationid,'location')}>{i.location}</a>
 							</div>;
@@ -154,7 +144,7 @@ var Assets = React.createClass({
 					<div id="tabCharacters" className="tab-pane fade">
 						<AssetHeader title='Characters'/>
 						{this.getCharacters().map(function (i) {
-							return <div className='character-preview-thumb' key={i.characterid}>
+							return <div className='character-preview-thumb preview-thumb' key={i.characterid}>
 								<a href='#'
 								   onClick={self.editClicked.bind(self, i.characterid,'character')}>{i.name}</a></div>;
 						})}
@@ -165,4 +155,9 @@ var Assets = React.createClass({
 	}
 });
 
-module.exports = Assets;
+//module.exports = Assets;
+ 
+React.render(
+	<Assets/>,
+	document.getElementById('assets')
+); 

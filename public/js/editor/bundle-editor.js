@@ -10650,7 +10650,6 @@ var Helpers = {
 module.exports = Helpers;
 
 },{}],5:[function(require,module,exports){
-//var React = require('react');
 var NotificationItem = require('./notification-item');
 var Constants = require('./constants');
 var Helpers = require('./helpers');
@@ -10706,11 +10705,9 @@ var NotificationContainer = React.createClass({displayName: "NotificationContain
 module.exports = NotificationContainer;
 
 },{"./constants":3,"./helpers":4,"./notification-item":6}],6:[function(require,module,exports){
-//var React = require('react');
 var Constants = require('./constants');
 var Styles = require('./styles');
 var Helpers = require('./helpers');
-var merge = require('object-assign');
 
 var NotificationItem = React.createClass({displayName: "NotificationItem",
 
@@ -10917,8 +10914,6 @@ var NotificationItem = React.createClass({displayName: "NotificationItem",
 
     var className = 'notification notification-' + notification.level;
 
-    var notificationStyle = merge({}, this._styles.notification);
-
     if (this.state.visible) {
       className = className + ' notification-visible';
     } else {
@@ -10932,22 +10927,22 @@ var NotificationItem = React.createClass({displayName: "NotificationItem",
     if (this.props.getStyles.overrideStyle) {
       var cssByPos = this._getCssPropertyByPosition();
       if (!this.state.visible && !this.state.removed) {
-        notificationStyle[cssByPos.property] = cssByPos.value;
+        this._styles.notification[cssByPos.property] = cssByPos.value;
       }
 
       if (this.state.visible && !this.state.removed) {
-        notificationStyle.height = this._height;
-        notificationStyle[cssByPos.property] = 0;
+        this._styles.notification.height = this._height;
+        this._styles.notification[cssByPos.property] = 0;
       }
 
       if (this.state.removed) {
-        notificationStyle.overlay = 'hidden';
-        notificationStyle.height = 0;
-        notificationStyle.marginTop = 0;
-        notificationStyle.paddingTop = 0;
-        notificationStyle.paddingBottom = 0;
+        this._styles.notification.overlay = 'hidden';
+        this._styles.notification.height = 0;
+        this._styles.notification.marginTop = 0;
+        this._styles.notification.paddingTop = 0;
+        this._styles.notification.paddingBottom = 0;
       }
-      notificationStyle.opacity = this.state.visible ? this._styles.notification.isVisible.opacity : this._styles.notification.isHidden.opacity;
+      this._styles.notification.opacity = this.state.visible ? this._styles.notification.isVisible.opacity : this._styles.notification.isHidden.opacity;
     }
 
     var dismiss = null;
@@ -10984,7 +10979,7 @@ var NotificationItem = React.createClass({displayName: "NotificationItem",
     }
 
     return (
-      React.createElement("div", {className: className, onClick: this._dismiss, style: notificationStyle}, 
+      React.createElement("div", {className: className, onClick: this._dismiss, style: this._styles.notification}, 
         title, 
         message, 
         dismiss, 
@@ -11016,8 +11011,7 @@ function whichTransitionEvent(){
 
 module.exports = NotificationItem;
 
-},{"./constants":3,"./helpers":4,"./styles":8,"object-assign":9}],7:[function(require,module,exports){
-//var React = require('react');
+},{"./constants":3,"./helpers":4,"./styles":8}],7:[function(require,module,exports){
 var merge = require('object-assign');
 var NotificationContainer = require('./notification-container');
 var Constants = require('./constants');
@@ -11148,6 +11142,10 @@ var NotificationSystem = React.createClass({displayName: "NotificationSystem",
 
       if (Object.keys(Constants.levels).indexOf(notification.level) === -1) {
         throw "'"+ notification.level +"' is not a valid level."
+      }
+
+      if (!notification.dismissible && !notification.action) {
+        throw "You need to set notification dismissible to true or set an action, otherwise user will not be able to dismiss the notification."
       }
 
     } catch(err) {
@@ -13010,44 +13008,6 @@ var Assets = React.createClass({
 			null,
 			React.createElement(
 				'div',
-				{ id: 'asset-header' },
-				React.createElement(
-					'ul',
-					{ className: 'nav nav-tabs' },
-					React.createElement(
-						'li',
-						{ className: 'active' },
-						React.createElement(
-							'a',
-							{ 'data-toggle': 'tab', href: '#tabChapters', title: 'Chapters' },
-							React.createElement('span', {
-								className: 'glyphicon glyphicon-book' })
-						)
-					),
-					React.createElement(
-						'li',
-						null,
-						React.createElement(
-							'a',
-							{ 'data-toggle': 'tab', href: '#tabLocations', title: 'Locations' },
-							React.createElement('span', {
-								className: 'glyphicon glyphicon-globe' })
-						)
-					),
-					React.createElement(
-						'li',
-						null,
-						React.createElement(
-							'a',
-							{ 'data-toggle': 'tab', href: '#tabCharacters', title: 'Characters' },
-							React.createElement('span', {
-								className: 'glyphicon glyphicon glyphicon-pawn' })
-						)
-					)
-				)
-			),
-			React.createElement(
-				'div',
 				{ className: 'tab-content' },
 				React.createElement(
 					'div',
@@ -13056,7 +13016,7 @@ var Assets = React.createClass({
 					this.getChapters().map(function (i) {
 						return React.createElement(
 							'div',
-							{ className: 'chapter-preview-thumb', key: i.chapterid },
+							{ className: 'chapter-preview-thumb preview-thumb', key: i.chapterid },
 							React.createElement(
 								'a',
 								{ href: '#',
@@ -13073,7 +13033,7 @@ var Assets = React.createClass({
 					this.getLocations().map(function (i) {
 						return React.createElement(
 							'div',
-							{ className: 'location-preview-thumb', key: i.locationid },
+							{ className: 'location-preview-thumb preview-thumb', key: i.locationid },
 							React.createElement(
 								'a',
 								{ href: '#',
@@ -13090,7 +13050,7 @@ var Assets = React.createClass({
 					this.getCharacters().map(function (i) {
 						return React.createElement(
 							'div',
-							{ className: 'character-preview-thumb', key: i.characterid },
+							{ className: 'character-preview-thumb preview-thumb', key: i.characterid },
 							React.createElement(
 								'a',
 								{ href: '#',
@@ -13105,7 +13065,9 @@ var Assets = React.createClass({
 	}
 });
 
-module.exports = Assets;
+//module.exports = Assets;
+
+React.render(React.createElement(Assets, null), document.getElementById('assets'));
 
 },{"superagent":10}],14:[function(require,module,exports){
 "use strict";
