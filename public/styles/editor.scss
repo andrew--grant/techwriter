@@ -1,5 +1,7 @@
 @import "bootstrap/bootstrap";
 
+//todo: print friendly style sheet
+
 // ------------------ variables --------------------/ 
 $color-background: white;
 //todo: set a good default for above or remove if not visible/needed 
@@ -26,6 +28,13 @@ $editor-padding: 25px;
   border-radius: $radius $radius 0 0;
 }
 
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
 // ------------------ variables --------------------/ 
 html, body {
   height: 100%;
@@ -41,9 +50,9 @@ html, body {
   background-color: $color-container-header-bg;
   color: $color-container-header;
   border-bottom: solid 1px $color-tab-border;
-  
+
   .main-header-row {
-	overflow:visible;
+	overflow: visible;
   }
 
   .editor-tools-wrapper, .assets-nav-wrapper {
@@ -54,6 +63,32 @@ html, body {
   .assets-nav-wrapper {
 	padding-left: 0;
 	padding-right: 0;
+
+	#assets-ddl-menu {
+	  width: 100%;
+
+	  .btn {
+		width: 100%;
+		height: $toolbar-height;
+		@include border-radius(0);
+		border-right: 0;
+		border-bottom: 0;
+		border-top: 0;
+	  }
+	}
+
+	#assets-ddl-menu ul {
+	  width: 100%;
+	  margin: auto; 
+	  @include border-radius(0);
+	  
+	  li {
+		width: 100%;
+		a {
+		  width: 100%;
+		}
+	  }
+	}
   }
 }
 
@@ -70,8 +105,7 @@ html, body {
 	background-color: $color-editor-wrapper;
 	height: 100%;
 	overflow: auto;
-	padding: 0 0 0 $editor-padding; 
-	
+	padding: 0 0 0 $editor-padding;
 
 	.ql-container {
 	  padding: $editor-padding $editor-padding * 2 0 $editor-padding;
