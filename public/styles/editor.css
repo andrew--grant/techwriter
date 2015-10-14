@@ -5872,7 +5872,7 @@ html, body {
   color: #000;
   border-bottom: solid 1px #bbb; }
   .container-header .main-header-row {
-    overflow: hidden; }
+    overflow: visible; }
   .container-header .editor-tools-wrapper, .container-header .assets-nav-wrapper {
     height: 42px;
     background-color: #eee; }
@@ -5887,9 +5887,19 @@ html, body {
   .container-main .row {
     height: 100%; }
   .container-main .editor-wrapper {
-    background-color: #fafafa;
+    background-color: #fff;
     height: 100%;
-    overflow: auto; }
+    overflow: auto;
+    padding: 0 0 0 25px; }
+    .container-main .editor-wrapper .ql-container {
+      padding: 25px 50px 0 25px; }
+      .container-main .editor-wrapper .ql-container .ql-editor {
+        background-color: #f7f7f7;
+        padding: 75px;
+        -webkit-border-radius: 4px 4px 0 0;
+        -moz-border-radius: 4px 4px 0 0;
+        -ms-border-radius: 4px 4px 0 0;
+        border-radius: 4px 4px 0 0; }
   .container-main .assets-wrapper {
     height: 100%;
     overflow: auto;
@@ -5899,7 +5909,7 @@ html, body {
     .container-main .assets-wrapper .preview-box-master, .container-main .assets-wrapper .new-asset, .container-main .assets-wrapper .preview-thumb {
       width: 90%;
       margin: auto auto 10px;
-      border: solid 1px red; }
+      border: solid 1px #f7f7f7; }
     .container-main .assets-wrapper .new-asset {
       height: 38.33333px; }
       .container-main .assets-wrapper .new-asset .new-asset-title {
