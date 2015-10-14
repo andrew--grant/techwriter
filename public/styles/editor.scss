@@ -13,6 +13,8 @@ $color-active-tab-and-tab-contents: #C2D5F2;
 $color-tab-border: #bbb;
 
 $toolbar-height: 42px;
+$gap-between-assets: 10px;
+$asset-box-height: 115px;
 
 // ------------------ mix-ins --------------------/ 
 @mixin border-radius($radius) {
@@ -36,23 +38,23 @@ html, body {
   width: 100%;
   background-color: $color-container-header-bg;
   color: $color-container-header;
-  border-bottom:solid 1px $color-tab-border;
-  
-  .main-header-row { 
+  border-bottom: solid 1px $color-tab-border;
+
+  .main-header-row {
 	overflow: hidden;
   }
 
   .editor-tools-wrapper, .assets-nav-wrapper {
-	height: $toolbar-height; 
+	height: $toolbar-height;
 	background-color: $color-container-header-bg;
-  } 
-  
+  }
+
   .assets-nav-wrapper {
 	padding-left: 0;
-	padding-right: 0; 
+	padding-right: 0;
   }
 }
- 
+
 .container-main {
   padding-top: 42px; // todo: 42
   width: 100%;
@@ -65,18 +67,40 @@ html, body {
   .editor-wrapper {
 	background-color: $color-editor-wrapper;
 	height: 100%;
-	overflow: auto; 
+	overflow: auto;
   }
 
   .assets-wrapper {
 	height: 100%;
 	overflow: auto;
 	background-color: $color-active-tab-and-tab-contents;
-	border-left: solid 1px $color-tab-border; 
+	border-left: solid 1px $color-tab-border;
+	padding-top: $gap-between-assets; 
 	
-	.preview-thumb{
-	  width:90%;
-	  border:solid 1px red;
+	.preview-box-master {
+	  width: 90%;
+	  margin: auto auto $gap-between-assets;
+	  border: solid 1px red;
+	}
+
+	.new-asset{ 
+	  @extend .preview-box-master;
+	  height: $asset-box-height / 3;
+
+	  .new-asset-title {
+		width:50%;
+		float: left;
+	  }
+
+	  .new-asset-create {
+		width:50%;
+		float: left;
+	  }
+	}
+	 
+	.preview-thumb {
+	  @extend .preview-box-master;
+	  height: $asset-box-height;
 	}
   }
 }

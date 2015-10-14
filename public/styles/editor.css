@@ -5894,7 +5894,19 @@ html, body {
     height: 100%;
     overflow: auto;
     background-color: #C2D5F2;
-    border-left: solid 1px #bbb; }
-    .container-main .assets-wrapper .preview-thumb {
+    border-left: solid 1px #bbb;
+    padding-top: 10px; }
+    .container-main .assets-wrapper .preview-box-master, .container-main .assets-wrapper .new-asset, .container-main .assets-wrapper .preview-thumb {
       width: 90%;
+      margin: auto auto 10px;
       border: solid 1px red; }
+    .container-main .assets-wrapper .new-asset {
+      height: 38.33333px; }
+      .container-main .assets-wrapper .new-asset .new-asset-title {
+        width: 50%;
+        float: left; }
+      .container-main .assets-wrapper .new-asset .new-asset-create {
+        width: 50%;
+        float: left; }
+    .container-main .assets-wrapper .preview-thumb {
+      height: 115px; }
