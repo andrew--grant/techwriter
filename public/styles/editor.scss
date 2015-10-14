@@ -4,15 +4,16 @@
 
 // ------------------ variables --------------------/ 
 $color-background: white;
-//todo: set a good default for above or remove if not visible/needed 
-$color-container-header-bg: #eee;
+$color-container-header-bg: #fcfcfc;
 $color-container-header: #000;
 $color-bar-secondary: #ccc;
-$color-editor-wrapper: #fff;
-$color-editor: darken($color-editor-wrapper, 3%);
+$color-editor-wrapper: #eee;
+$color-editor: lighten($color-editor-wrapper, 25%);
 $color-heading-strip: #f5f5f5;
 $color-picker-label: #fbfbfb !important;
-$color-active-tab-and-tab-contents: #C2D5F2;
+$assets-primary: #C2D5F2;
+$assets-secondary: $color-editor-wrapper;
+//$color-active-tab-and-tab-contents: #C2D5F2;
 $color-tab-border: #bbb;
 $toolbar-height: 42px;
 $gap-between-assets: 10px;
@@ -70,6 +71,7 @@ html, body {
 	  .btn {
 		width: 100%;
 		height: $toolbar-height;
+		background-color: $color-container-header-bg;
 		@include border-radius(0);
 		border-right: 0;
 		border-bottom: 0;
@@ -79,9 +81,9 @@ html, body {
 
 	#assets-ddl-menu ul {
 	  width: 100%;
-	  margin: auto; 
+	  margin: auto;
 	  @include border-radius(0);
-	  
+
 	  li {
 		width: 100%;
 		a {
@@ -122,14 +124,15 @@ html, body {
   .assets-wrapper {
 	height: 100%;
 	overflow: auto;
-	background-color: $color-active-tab-and-tab-contents;
+	background-color: $assets-secondary;
 	border-left: solid 1px $color-tab-border;
 	padding-top: $gap-between-assets;
 
 	.preview-box-master {
-	  width: 90%;
+	  width: 100%;
+	  padding: 6px;
+	  background-color: $assets-primary;
 	  margin: auto auto $gap-between-assets;
-	  border: solid 1px $color-editor;
 	}
 
 	.new-asset {
