@@ -12,11 +12,10 @@ $color-editor: lighten($color-editor-wrapper, 25%);
 $color-heading-strip: #f5f5f5;
 $color-picker-label: #fbfbfb !important;
 $assets-primary: #C2D5F2;
-$assets-secondary: #337ab7;//$color-editor-wrapper;
-//$color-active-tab-and-tab-contents: #C2D5F2;
+$assets-secondary: #337ab7;
 $color-main-borders: #bbb;
 $toolbar-height: 42px;
-$gap-between-assets: 10px;
+$gap-between-assets: 15px;
 $asset-box-height: 115px;
 $corner-radius: 4px;
 $editor-padding: 25px;
@@ -36,13 +35,14 @@ $editor-padding: 25px;
   border-radius: $radius;
 }
 
-// ------------------ variables --------------------/ 
+// ------------------ misc --------------------/ 
 html, body {
   height: 100%;
   overflow: hidden;
   background-color: $color-background;
 }
 
+// ------------------ header container (navs) --------------------/ 
 .container-header {
   position: fixed;
   z-index: 1000;
@@ -76,7 +76,7 @@ html, body {
 		border-right: 0;
 		border-bottom: 0;
 		border-top: 0;
-		border-left:solid 1px $color-main-borders;
+		border-left: solid 1px $color-main-borders;
 	  }
 	}
 
@@ -94,6 +94,8 @@ html, body {
 	}
   }
 }
+
+// ------------------ editor and assets --------------------/ 
 
 .container-main {
   padding-top: 42px;
@@ -127,8 +129,8 @@ html, body {
 	overflow: auto;
 	background-color: $assets-secondary;
 	border-left: solid 1px $color-main-borders;
-	padding-top: $gap-between-assets;
-	 
+	padding: $gap-between-assets;
+
 	.preview-box-master {
 	  width: 100%;
 	  padding: 6px;
@@ -140,7 +142,7 @@ html, body {
 	.new-asset {
 	  @extend .preview-box-master;
 	  height: $asset-box-height / 3;
-	  margin-top: 10px;
+	  
 	  .new-asset-title {
 		width: 50%;
 		float: left;
@@ -153,14 +155,9 @@ html, body {
 	}
 
 	.preview-thumb {
-	  @extend .preview-box-master; 
+	  @extend .preview-box-master;
 	  height: $asset-box-height;
 	}
   }
 }
 
-
-.dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover{
- // background-color: red; 
-
-}

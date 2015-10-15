@@ -5930,19 +5930,18 @@ html, body {
     overflow: auto;
     background-color: #337ab7;
     border-left: solid 1px #bbb;
-    padding-top: 10px; }
+    padding: 15px; }
     .container-main .assets-wrapper .preview-box-master, .container-main .assets-wrapper .new-asset, .container-main .assets-wrapper .preview-thumb {
       width: 100%;
       padding: 6px;
       background-color: #C2D5F2;
-      margin: auto auto 10px;
+      margin: auto auto 15px;
       -webkit-border-radius: 4px;
       -moz-border-radius: 4px;
       -ms-border-radius: 4px;
       border-radius: 4px; }
     .container-main .assets-wrapper .new-asset {
-      height: 38.33333px;
-      margin-top: 10px; }
+      height: 38.33333px; }
       .container-main .assets-wrapper .new-asset .new-asset-title {
         width: 50%;
         float: left; }
