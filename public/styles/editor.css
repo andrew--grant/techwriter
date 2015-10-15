@@ -5891,7 +5891,8 @@ html, body {
         border-radius: 0;
         border-right: 0;
         border-bottom: 0;
-        border-top: 0; }
+        border-top: 0;
+        border-left: solid 1px #bbb; }
     .container-header .assets-nav-wrapper #assets-ddl-menu ul {
       width: 100%;
       margin: auto;
@@ -5927,16 +5928,21 @@ html, body {
   .container-main .assets-wrapper {
     height: 100%;
     overflow: auto;
-    background-color: #eee;
+    background-color: #337ab7;
     border-left: solid 1px #bbb;
     padding-top: 10px; }
     .container-main .assets-wrapper .preview-box-master, .container-main .assets-wrapper .new-asset, .container-main .assets-wrapper .preview-thumb {
       width: 100%;
       padding: 6px;
       background-color: #C2D5F2;
-      margin: auto auto 10px; }
+      margin: auto auto 10px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      border-radius: 4px; }
     .container-main .assets-wrapper .new-asset {
-      height: 38.33333px; }
+      height: 38.33333px;
+      margin-top: 10px; }
       .container-main .assets-wrapper .new-asset .new-asset-title {
         width: 50%;
         float: left; }

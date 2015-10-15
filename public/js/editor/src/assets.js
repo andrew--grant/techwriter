@@ -123,7 +123,7 @@ var Assets = React.createClass({
 		return (
 			<div> 
 				<div className="tab-content">
-					<div id="tabChapters" className="tab-pane fade in active">
+					<div id="tabChapters"  role="tabpanel" className="tab-pane fade in active">
 						<AssetHeader title='Chapters'/>
 						{this.getChapters().map(function (i) {
 							return <div className='chapter-preview-thumb preview-thumb' key={i.chapterid}>
@@ -132,7 +132,7 @@ var Assets = React.createClass({
 							</div>;
 						})}
 					</div>
-					<div id="tabLocations" className="tab-pane fade">
+					<div id="tabLocations" role="tabpanel"  className="tab-pane fade">
 						<AssetHeader title='Locations'/>
 						{    this.getLocations().map(function (i) {
 							return <div className='location-preview-thumb preview-thumb' key={i.locationid}>
@@ -141,7 +141,7 @@ var Assets = React.createClass({
 							</div>;
 						})}
 					</div>
-					<div id="tabCharacters" className="tab-pane fade">
+					<div id="tabCharacters"  role="tabpanel" className="tab-pane fade">
 						<AssetHeader title='Characters'/>
 						{this.getCharacters().map(function (i) {
 							return <div className='character-preview-thumb preview-thumb' key={i.characterid}>
@@ -155,8 +155,7 @@ var Assets = React.createClass({
 	}
 });
 
-//module.exports = Assets;
- 
+
 React.render(
 	<Assets/>,
 	document.getElementById('assets')

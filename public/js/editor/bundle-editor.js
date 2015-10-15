@@ -10650,6 +10650,7 @@ var Helpers = {
 module.exports = Helpers;
 
 },{}],5:[function(require,module,exports){
+//var React = require('react');
 var NotificationItem = require('./notification-item');
 var Constants = require('./constants');
 var Helpers = require('./helpers');
@@ -10705,9 +10706,11 @@ var NotificationContainer = React.createClass({displayName: "NotificationContain
 module.exports = NotificationContainer;
 
 },{"./constants":3,"./helpers":4,"./notification-item":6}],6:[function(require,module,exports){
+//var React = require('react');
 var Constants = require('./constants');
 var Styles = require('./styles');
 var Helpers = require('./helpers');
+var merge = require('object-assign');
 
 var NotificationItem = React.createClass({displayName: "NotificationItem",
 
@@ -10914,6 +10917,8 @@ var NotificationItem = React.createClass({displayName: "NotificationItem",
 
     var className = 'notification notification-' + notification.level;
 
+    var notificationStyle = merge({}, this._styles.notification);
+
     if (this.state.visible) {
       className = className + ' notification-visible';
     } else {
@@ -10927,22 +10932,22 @@ var NotificationItem = React.createClass({displayName: "NotificationItem",
     if (this.props.getStyles.overrideStyle) {
       var cssByPos = this._getCssPropertyByPosition();
       if (!this.state.visible && !this.state.removed) {
-        this._styles.notification[cssByPos.property] = cssByPos.value;
+        notificationStyle[cssByPos.property] = cssByPos.value;
       }
 
       if (this.state.visible && !this.state.removed) {
-        this._styles.notification.height = this._height;
-        this._styles.notification[cssByPos.property] = 0;
+        notificationStyle.height = this._height;
+        notificationStyle[cssByPos.property] = 0;
       }
 
       if (this.state.removed) {
-        this._styles.notification.overlay = 'hidden';
-        this._styles.notification.height = 0;
-        this._styles.notification.marginTop = 0;
-        this._styles.notification.paddingTop = 0;
-        this._styles.notification.paddingBottom = 0;
+        notificationStyle.overlay = 'hidden';
+        notificationStyle.height = 0;
+        notificationStyle.marginTop = 0;
+        notificationStyle.paddingTop = 0;
+        notificationStyle.paddingBottom = 0;
       }
-      this._styles.notification.opacity = this.state.visible ? this._styles.notification.isVisible.opacity : this._styles.notification.isHidden.opacity;
+      notificationStyle.opacity = this.state.visible ? this._styles.notification.isVisible.opacity : this._styles.notification.isHidden.opacity;
     }
 
     var dismiss = null;
@@ -10979,7 +10984,7 @@ var NotificationItem = React.createClass({displayName: "NotificationItem",
     }
 
     return (
-      React.createElement("div", {className: className, onClick: this._dismiss, style: this._styles.notification}, 
+      React.createElement("div", {className: className, onClick: this._dismiss, style: notificationStyle}, 
         title, 
         message, 
         dismiss, 
@@ -11011,7 +11016,8 @@ function whichTransitionEvent(){
 
 module.exports = NotificationItem;
 
-},{"./constants":3,"./helpers":4,"./styles":8}],7:[function(require,module,exports){
+},{"./constants":3,"./helpers":4,"./styles":8,"object-assign":9}],7:[function(require,module,exports){
+//var React = require('react');
 var merge = require('object-assign');
 var NotificationContainer = require('./notification-container');
 var Constants = require('./constants');
@@ -11142,10 +11148,6 @@ var NotificationSystem = React.createClass({displayName: "NotificationSystem",
 
       if (Object.keys(Constants.levels).indexOf(notification.level) === -1) {
         throw "'"+ notification.level +"' is not a valid level."
-      }
-
-      if (!notification.dismissible && !notification.action) {
-        throw "You need to set notification dismissible to true or set an action, otherwise user will not be able to dismiss the notification."
       }
 
     } catch(err) {
@@ -12876,6 +12878,74 @@ module.exports = function(arr, fn, initial){
 };
 },{}],13:[function(require,module,exports){
 "use strict";
+
+var AssetsMenu = React.createClass({
+	displayName: "AssetsMenu",
+
+	getInitialState: function getInitialState() {
+		return {};
+	},
+
+	componentDidMount: function componentDidMount() {
+		$(".dropdown-menu a").on("click", function (e) {
+			var href = $(e.target).attr('href');
+			$(e.target).parent().parent().children().removeClass('active');
+			$(href).tab('show');
+		});
+	},
+
+	itemSelected: function itemSelected() {},
+
+	render: function render() {
+		return React.createElement(
+			"div",
+			{ id: "assets-ddl-menu", className: "dropdown" },
+			React.createElement(
+				"button",
+				{ className: "btn btn-default dropdown-toggle", type: "button", id: "dropdownMenu1",
+					"data-toggle": "dropdown" },
+				"Assets",
+				React.createElement("span", { className: "caret" })
+			),
+			React.createElement(
+				"ul",
+				{ className: "dropdown-menu", "aria-labelledby": "dropdownMenu1" },
+				React.createElement(
+					"li",
+					null,
+					React.createElement(
+						"a",
+						{ href: "#tabChapters", "data-toggle": "tab" },
+						"Chapters"
+					)
+				),
+				React.createElement(
+					"li",
+					null,
+					React.createElement(
+						"a",
+						{ href: "#tabLocations", "data-toggle": "tab" },
+						"Locations"
+					)
+				),
+				React.createElement(
+					"li",
+					null,
+					React.createElement(
+						"a",
+						{ href: "#tabCharacters", "data-toggle": "tab" },
+						"Characters"
+					)
+				)
+			)
+		);
+	}
+});
+
+React.render(React.createElement(AssetsMenu, null), document.getElementById('assets-menu'));
+
+},{}],14:[function(require,module,exports){
+"use strict";
 var superagent = require('superagent');
 
 var AssetHeader = React.createClass({
@@ -13011,7 +13081,7 @@ var Assets = React.createClass({
 				{ className: 'tab-content' },
 				React.createElement(
 					'div',
-					{ id: 'tabChapters', className: 'tab-pane fade in active' },
+					{ id: 'tabChapters', role: 'tabpanel', className: 'tab-pane fade in active' },
 					React.createElement(AssetHeader, { title: 'Chapters' }),
 					this.getChapters().map(function (i) {
 						return React.createElement(
@@ -13028,7 +13098,7 @@ var Assets = React.createClass({
 				),
 				React.createElement(
 					'div',
-					{ id: 'tabLocations', className: 'tab-pane fade' },
+					{ id: 'tabLocations', role: 'tabpanel', className: 'tab-pane fade' },
 					React.createElement(AssetHeader, { title: 'Locations' }),
 					this.getLocations().map(function (i) {
 						return React.createElement(
@@ -13045,7 +13115,7 @@ var Assets = React.createClass({
 				),
 				React.createElement(
 					'div',
-					{ id: 'tabCharacters', className: 'tab-pane fade' },
+					{ id: 'tabCharacters', role: 'tabpanel', className: 'tab-pane fade' },
 					React.createElement(AssetHeader, { title: 'Characters' }),
 					this.getCharacters().map(function (i) {
 						return React.createElement(
@@ -13065,11 +13135,9 @@ var Assets = React.createClass({
 	}
 });
 
-//module.exports = Assets;
-
 React.render(React.createElement(Assets, null), document.getElementById('assets'));
 
-},{"superagent":10}],14:[function(require,module,exports){
+},{"superagent":10}],15:[function(require,module,exports){
 "use strict";
 
 // todo: set/read from local cookie
@@ -13121,7 +13189,7 @@ var ContrastControl = React.createClass({
 
 module.exports = ContrastControl;
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 "use strict";
 var Quill = require('quill');
 var superagent = require('superagent');
@@ -13238,7 +13306,7 @@ var EditorToolbar = React.createClass({
 //module.exports = EditorToolbar;
 React.render(React.createElement(EditorToolbar, null), document.getElementById('editor-toolbar'));
 
-},{"./contrast-control.js":14,"quill":2,"superagent":10}],16:[function(require,module,exports){
+},{"./contrast-control.js":15,"quill":2,"superagent":10}],17:[function(require,module,exports){
 "use strict";
 var Quill = require('quill');
 var EditorToolbar = require('./editor-toolbar.js');
@@ -13357,9 +13425,10 @@ var Editor = React.createClass({
 
 React.render(React.createElement(Editor, null), document.getElementById('editor'));
 
-},{"./assets.js":13,"./editor-toolbar.js":15,"quill":2,"react-notification-system":7,"superagent":10}],17:[function(require,module,exports){
+},{"./assets.js":14,"./editor-toolbar.js":16,"quill":2,"react-notification-system":7,"superagent":10}],18:[function(require,module,exports){
 "use strict";
 require('./editor.js');
 require('./assets.js');
+require('./assets-menu.js');
 
-},{"./assets.js":13,"./editor.js":16}]},{},[17]);
+},{"./assets-menu.js":13,"./assets.js":14,"./editor.js":17}]},{},[18]);

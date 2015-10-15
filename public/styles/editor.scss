@@ -12,9 +12,9 @@ $color-editor: lighten($color-editor-wrapper, 25%);
 $color-heading-strip: #f5f5f5;
 $color-picker-label: #fbfbfb !important;
 $assets-primary: #C2D5F2;
-$assets-secondary: $color-editor-wrapper;
+$assets-secondary: #337ab7;//$color-editor-wrapper;
 //$color-active-tab-and-tab-contents: #C2D5F2;
-$color-tab-border: #bbb;
+$color-main-borders: #bbb;
 $toolbar-height: 42px;
 $gap-between-assets: 10px;
 $asset-box-height: 115px;
@@ -50,7 +50,7 @@ html, body {
   width: 100%;
   background-color: $color-container-header-bg;
   color: $color-container-header;
-  border-bottom: solid 1px $color-tab-border;
+  border-bottom: solid 1px $color-main-borders;
 
   .main-header-row {
 	overflow: visible;
@@ -76,6 +76,7 @@ html, body {
 		border-right: 0;
 		border-bottom: 0;
 		border-top: 0;
+		border-left:solid 1px $color-main-borders;
 	  }
 	}
 
@@ -125,20 +126,21 @@ html, body {
 	height: 100%;
 	overflow: auto;
 	background-color: $assets-secondary;
-	border-left: solid 1px $color-tab-border;
+	border-left: solid 1px $color-main-borders;
 	padding-top: $gap-between-assets;
-
+	 
 	.preview-box-master {
 	  width: 100%;
 	  padding: 6px;
 	  background-color: $assets-primary;
 	  margin: auto auto $gap-between-assets;
+	  @include border-radius($corner-radius);
 	}
 
 	.new-asset {
 	  @extend .preview-box-master;
 	  height: $asset-box-height / 3;
-
+	  margin-top: 10px;
 	  .new-asset-title {
 		width: 50%;
 		float: left;
@@ -151,8 +153,14 @@ html, body {
 	}
 
 	.preview-thumb {
-	  @extend .preview-box-master;
+	  @extend .preview-box-master; 
 	  height: $asset-box-height;
 	}
   }
+}
+
+
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover{
+ // background-color: red; 
+
 }
