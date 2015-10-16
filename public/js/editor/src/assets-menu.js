@@ -30,6 +30,7 @@ var AssetsMenu = React.createClass({
 					<li><a href="#tabChapters" data-toggle="tab">Chapters</a></li>
 					<li><a href="#tabLocations" data-toggle="tab">Locations</a></li>
 					<li><a href="#tabCharacters" data-toggle="tab">Characters</a></li>
+					<li><a href="#tabCurrent" data-toggle="tab">Current</a></li>
 				</ul>
 			</div>
 		);

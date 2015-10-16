@@ -35,6 +35,57 @@ $editor-padding: 25px;
   border-radius: $radius;
 }
 
+// ------------------ contrasts --------------------/ 
+
+.contrast1 {
+  .container-main {
+	.editor-wrapper {
+	  background-color: #C0C0C0;
+	  .ql-container {
+		.ql-editor {
+		  background-color: #F8F8F8;
+		  //color:red;
+		}
+	  }
+	}
+	.assets-wrapper {
+	  background-color: darken(#C0C0C0, 15%);
+	}
+  }
+}
+
+.contrast2 {
+  .container-main {
+	.editor-wrapper {
+	  background-color: #505050;
+	  .ql-container {
+		.ql-editor {
+		  background-color: #E8E8E8;
+		}
+	  }
+	}
+	.assets-wrapper {
+	  background-color: darken(#505050, 15%);
+	}
+  }
+}
+
+.contrast3 {
+  .container-main {
+	.editor-wrapper {
+	  background-color: #EBECE4;
+	  .ql-container {
+		.ql-editor {
+		  background-color: #FEFEF2;
+		}
+	  }
+	}
+	.assets-wrapper {
+	  background-color: darken(#EBECE4, 15%);
+	}
+  }
+}
+
 // ------------------ misc --------------------/ 
 html, body {
   height: 100%;
@@ -61,6 +112,16 @@ html, body {
 	background-color: $color-container-header-bg;
   }
 
+  .editor-tools-wrapper {
+	.btn-contrast {
+	  cursor: pointer;
+	  top:3px;
+	}
+	.btn-contrast:hover{
+	  color:#0066CC;
+	}
+  }
+  
   .assets-nav-wrapper {
 	padding-left: 0;
 	padding-right: 0;
@@ -77,6 +138,10 @@ html, body {
 		border-bottom: 0;
 		border-top: 0;
 		border-left: solid 1px $color-main-borders;
+
+		.caret {
+		  margin-left: 6px;
+		}
 	  }
 	}
 
@@ -142,7 +207,7 @@ html, body {
 	.new-asset {
 	  @extend .preview-box-master;
 	  height: $asset-box-height / 3;
-	  
+
 	  .new-asset-title {
 		width: 50%;
 		float: left;
@@ -161,3 +226,5 @@ html, body {
   }
 }
 
+//.container-header .col-sm-3,.container-main .col-sm-3 {display: none;}
+//.container-header .col-sm-9,.container-main .col-sm-9 {width: 100%;}

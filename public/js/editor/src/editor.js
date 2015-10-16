@@ -33,7 +33,8 @@ var Editor = React.createClass({
 	componentDidMount: function () {
 		var editor = new Quill('#quill', {
 			modules: {
-				'toolbar': {container: '#editor-toolbar'}
+				'toolbar': {container: '#editor-toolbar'},
+				
 			},
 			theme: 'snow',
 			poll: 200

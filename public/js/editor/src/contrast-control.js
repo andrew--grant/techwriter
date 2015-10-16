@@ -4,7 +4,6 @@
 // or set as profile on server for
 // cross device support
 
-
 // todo: control for line and word spacing adjustment
 
 
@@ -15,11 +14,22 @@ var ContrastControl = React.createClass({
 	},
 
 	componentDidMount: function () {
+		var self = this;
+		$('.btn-contrast').on('click', function () {
+			self.adjustContrast();
+			// todo: cookie store
+		});
+
+		// todo: make enahnced controls (rename) and add feature 'hide/show assets'
+		// .container-header .col-sm-3,.container-main .col-sm-3 {display: none;}
+		// .container-header .col-sm-9,.container-main .col-sm-9 {width: 100%;}
+		// glyphicon-eye-open / close http://getbootstrap.com/components/
+
 	},
 
-	adjustContrast: function () { 
+	adjustContrast: function () {
 		(function setCss(index, self) {
-			var numLevels = 5;
+			var numLevels = 4;
 			$('body').addClass('contrast' + index);
 			for (var i = 1; i <= numLevels; i++) {
 				if (i != index) {
@@ -33,13 +43,10 @@ var ContrastControl = React.createClass({
 			}
 		})(this.state.contrastLevel, this)
 	},
-
+//<a href="#" onClick={}></a>
 	render: function () {
 		return (
-			<span>
-				Level: {this.state.contrastLevel}
-				<a href="#" onClick={this.adjustContrast}>adjust contrast</a>
-			</span>
+			<span title="Contrast" className="btn-contrast glyphicon glyphicon-adjust"></span>
 		);
 	}
 });
