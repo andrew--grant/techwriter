@@ -1,7 +1,7 @@
 "use strict";
 var Quill = require('quill');
 var superagent = require('superagent');
-var ContrastControl = require('./contrast-control.js');
+var ToolbarControls = require('./toolbar-controls.js');
 
 var EditorToolbar = React.createClass({
 
@@ -67,7 +67,7 @@ var EditorToolbar = React.createClass({
 				<span className="ql-format-separator"></span>
 				<span title="Strikethrough" className="ql-format-button ql-strike"></span>
 				<span className="ql-format-separator"></span>
-				<ContrastControl/>
+				<ToolbarControls/>
 			</div>
 		);
 	}

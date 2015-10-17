@@ -13148,62 +13148,9 @@ React.render(React.createElement(Assets, null), document.getElementById('assets'
 
 },{"superagent":10}],15:[function(require,module,exports){
 "use strict";
-
-// todo: set/read from local cookie
-// or set as profile on server for
-// cross device support
-
-// todo: control for line and word spacing adjustment
-
-var ContrastControl = React.createClass({
-	displayName: 'ContrastControl',
-
-	getInitialState: function getInitialState() {
-		return { contrastLevel: 1 };
-	},
-
-	componentDidMount: function componentDidMount() {
-		var self = this;
-		$('.btn-contrast').on('click', function () {
-			self.adjustContrast();
-			// todo: cookie store
-		});
-
-		// todo: make enahnced controls (rename) and add feature 'hide/show assets'
-		// .container-header .col-sm-3,.container-main .col-sm-3 {display: none;}
-		// .container-header .col-sm-9,.container-main .col-sm-9 {width: 100%;}
-		// glyphicon-eye-open / close http://getbootstrap.com/components/
-	},
-
-	adjustContrast: function adjustContrast() {
-		(function setCss(index, self) {
-			var numLevels = 4;
-			$('body').addClass('contrast' + index);
-			for (var i = 1; i <= numLevels; i++) {
-				if (i != index) {
-					$('body').removeClass('contrast' + i);
-				}
-			}
-			if (numLevels == index) {
-				self.setState({ contrastLevel: 1 });
-			} else {
-				self.setState({ contrastLevel: self.state.contrastLevel + 1 });
-			}
-		})(this.state.contrastLevel, this);
-	},
-	//<a href="#" onClick={}></a>
-	render: function render() {
-		return React.createElement('span', { title: 'Contrast', className: 'btn-contrast glyphicon glyphicon-adjust' });
-	}
-});
-
-module.exports = ContrastControl;
-
-},{}],16:[function(require,module,exports){
-"use strict";
 var Quill = require('quill');
 var superagent = require('superagent');
-var ContrastControl = require('./contrast-control.js');
+var ToolbarControls = require('./toolbar-controls.js');
 
 var EditorToolbar = React.createClass({
 	displayName: 'EditorToolbar',
@@ -13305,14 +13252,14 @@ var EditorToolbar = React.createClass({
 			React.createElement('span', { className: 'ql-format-separator' }),
 			React.createElement('span', { title: 'Strikethrough', className: 'ql-format-button ql-strike' }),
 			React.createElement('span', { className: 'ql-format-separator' }),
-			React.createElement(ContrastControl, null)
+			React.createElement(ToolbarControls, null)
 		);
 	}
 });
 
 React.render(React.createElement(EditorToolbar, null), document.getElementById('editor-toolbar'));
 
-},{"./contrast-control.js":15,"quill":2,"superagent":10}],17:[function(require,module,exports){
+},{"./toolbar-controls.js":18,"quill":2,"superagent":10}],16:[function(require,module,exports){
 "use strict";
 var Quill = require('quill');
 var EditorToolbar = require('./editor-toolbar.js');
@@ -13432,10 +13379,94 @@ var Editor = React.createClass({
 
 React.render(React.createElement(Editor, null), document.getElementById('editor'));
 
-},{"./assets.js":14,"./editor-toolbar.js":16,"quill":2,"react-notification-system":7,"superagent":10}],18:[function(require,module,exports){
+},{"./assets.js":14,"./editor-toolbar.js":15,"quill":2,"react-notification-system":7,"superagent":10}],17:[function(require,module,exports){
 "use strict";
 require('./editor.js');
 require('./assets.js');
 require('./assets-menu.js');
 
-},{"./assets-menu.js":13,"./assets.js":14,"./editor.js":17}]},{},[18]);
+},{"./assets-menu.js":13,"./assets.js":14,"./editor.js":16}],18:[function(require,module,exports){
+"use strict";
+
+// todo: set/read from local cookie
+// or set as profile on server for
+// cross device support
+
+// todo: control for line and word spacing adjustment
+
+var ToolbarControls = React.createClass({
+	displayName: 'ToolbarControls',
+
+	getInitialState: function getInitialState() {
+		return {
+			contrastLevel: 1,
+			assetsVisible: true
+		};
+	},
+
+	componentDidMount: function componentDidMount() {
+		var self = this;
+		$('.btn-contrast').on('click', function () {
+			self.adjustContrast();
+			// todo: cookie store
+		});
+
+		$('.btn-show-hide-assets').on('click', function () {
+			self.showHideAssets();
+			// todo: cookie store
+		});
+	},
+
+	adjustContrast: function adjustContrast() {
+		(function setCss(index, self) {
+			var numLevels = 3;
+			$('body').addClass('contrast' + index);
+			for (var i = 1; i <= numLevels; i++) {
+				if (i != index) {
+					$('body').removeClass('contrast' + i);
+				}
+			}
+			if (numLevels == index) {
+				self.setState({ contrastLevel: 1 });
+			} else {
+				self.setState({ contrastLevel: self.state.contrastLevel + 1 });
+			}
+			if (self.state.contrastLevel == 1) {
+				console.log(i);
+				$('.btn-contrast').removeClass('btn-active').addClass('btn-inactive');
+			} else {
+				console.log("else " + i);
+				$('.btn-contrast').removeClass('btn-inactive').addClass('btn-active');
+			}
+		})(this.state.contrastLevel, this);
+	},
+
+	showHideAssets: function showHideAssets() {
+		console.log(this.state.assetsVisible);
+		if (this.state.assetsVisible) {
+			$('.container-header .col-sm-3, .container-main .col-sm-3').css('display', 'none');
+			$('.container-header .col-sm-9, .container-main .col-sm-9').css('width', '100%');
+			this.state.assetsVisible = false;
+			$('.btn-show-hide-assets').removeClass('glyphicon-eye-open').addClass('glyphicon-eye-close').removeClass('btn-inactive').addClass('btn-active');
+		} else {
+			$('.container-header .col-sm-3, .container-main .col-sm-3').css('display', 'block');
+			$('.container-header .col-sm-9, .container-main .col-sm-9').css('width', '75%');
+			this.state.assetsVisible = true;
+			$('.btn-show-hide-assets').removeClass('glyphicon-eye-close').addClass('glyphicon-eye-open').removeClass('btn-active').addClass('.btn-inactive');
+		}
+	},
+
+	render: function render() {
+		return React.createElement(
+			'span',
+			null,
+			React.createElement('span', { title: 'Contrast', className: 'btn-contrast glyphicon glyphicon-adjust' }),
+			React.createElement('span', { className: 'ql-format-separator' }),
+			React.createElement('span', { title: 'Hide/Show Assets', className: 'btn-show-hide-assets glyphicon glyphicon-eye-open' })
+		);
+	}
+});
+
+module.exports = ToolbarControls;
+
+},{}]},{},[17]);

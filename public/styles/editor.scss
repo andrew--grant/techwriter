@@ -37,24 +37,24 @@ $editor-padding: 25px;
 
 // ------------------ contrasts --------------------/ 
 
-.contrast1 {
-  .container-main {
-	.editor-wrapper {
-	  background-color: #C0C0C0;
-	  .ql-container {
-		.ql-editor {
-		  background-color: #F8F8F8;
-		  //color:red;
-		}
-	  }
-	}
-	.assets-wrapper {
-	  background-color: darken(#C0C0C0, 15%);
-	}
-  }
-}
+//.contrast1 {
+//  .container-main {
+//	.editor-wrapper {
+//	  background-color: #C0C0C0;
+//	  .ql-container {
+//		.ql-editor {
+//		  background-color: #F8F8F8;
+//		  //color:red;
+//		}
+//	  }
+//	}
+//	.assets-wrapper {
+//	  background-color: darken(#C0C0C0, 15%);
+//	}
+//  }
+//}
 
-.contrast2 {
+.contrast1 {
   .container-main {
 	.editor-wrapper {
 	  background-color: #505050;
@@ -70,7 +70,7 @@ $editor-padding: 25px;
   }
 }
 
-.contrast3 {
+.contrast2 {
   .container-main {
 	.editor-wrapper {
 	  background-color: #EBECE4;
@@ -113,15 +113,35 @@ html, body {
   }
 
   .editor-tools-wrapper {
+	$btn-hover-color: #0066CC;
 	.btn-contrast {
 	  cursor: pointer;
-	  top:3px;
+	  top: 3px;
 	}
-	.btn-contrast:hover{
-	  color:#0066CC;
+
+	.btn-contrast:hover {
+	  color: $btn-hover-color;
 	}
+
+	.btn-show-hide-assets {
+	  cursor: pointer;
+	  top: 3px;
+	}
+
+	.btn-show-hide-assets:hover {
+	  color: $btn-hover-color;
+	}
+
+	.btn-active {
+	  color: $btn-hover-color;
+	}
+
+	.btn-inactive {
+	  color: #000;
+	}
+
   }
-  
+
   .assets-nav-wrapper {
 	padding-left: 0;
 	padding-right: 0;
@@ -226,5 +246,3 @@ html, body {
   }
 }
 
-//.container-header .col-sm-3,.container-main .col-sm-3 {display: none;}
-//.container-header .col-sm-9,.container-main .col-sm-9 {width: 100%;}

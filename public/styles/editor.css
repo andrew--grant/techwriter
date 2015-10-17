@@ -5859,27 +5859,19 @@ button.close {
     display: none !important; } }
 
 .contrast1 .container-main .editor-wrapper {
-  background-color: #C0C0C0; }
-  .contrast1 .container-main .editor-wrapper .ql-container .ql-editor {
-    background-color: #F8F8F8; }
-
-.contrast1 .container-main .assets-wrapper {
-  background-color: #9a9a9a; }
-
-.contrast2 .container-main .editor-wrapper {
   background-color: #505050; }
-  .contrast2 .container-main .editor-wrapper .ql-container .ql-editor {
+  .contrast1 .container-main .editor-wrapper .ql-container .ql-editor {
     background-color: #E8E8E8; }
 
-.contrast2 .container-main .assets-wrapper {
+.contrast1 .container-main .assets-wrapper {
   background-color: #2a2a2a; }
 
-.contrast3 .container-main .editor-wrapper {
+.contrast2 .container-main .editor-wrapper {
   background-color: #EBECE4; }
-  .contrast3 .container-main .editor-wrapper .ql-container .ql-editor {
+  .contrast2 .container-main .editor-wrapper .ql-container .ql-editor {
     background-color: #FEFEF2; }
 
-.contrast3 .container-main .assets-wrapper {
+.contrast2 .container-main .assets-wrapper {
   background-color: #caccb7; }
 
 html, body {
@@ -5905,6 +5897,15 @@ html, body {
     top: 3px; }
   .container-header .editor-tools-wrapper .btn-contrast:hover {
     color: #0066CC; }
+  .container-header .editor-tools-wrapper .btn-show-hide-assets {
+    cursor: pointer;
+    top: 3px; }
+  .container-header .editor-tools-wrapper .btn-show-hide-assets:hover {
+    color: #0066CC; }
+  .container-header .editor-tools-wrapper .btn-active {
+    color: #0066CC; }
+  .container-header .editor-tools-wrapper .btn-inactive {
+    color: #000; }
   .container-header .assets-nav-wrapper {
     padding-left: 0;
     padding-right: 0; }
